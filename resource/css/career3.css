@@ -1,0 +1,501 @@
+@charset "utf-8";
+
+/* ============================================================
+   [Careers] 채용공고 — 있음/없음 두 상태를 .is-empty로 전환
+   ============================================================ */
+:root {
+    --jb-bg: #faf8f3;
+    --jb-navy: #22355c;
+    --jb-gray: #8a9099;
+    --jb-box: #f1efeb;
+    --jb-line: #e4e6ea;
+}
+
+.jb {
+    background: var(--jb-bg);
+}
+
+
+/* ------------------------------------------------------------
+   히어로 : 배경 이미지 없이 크림
+   ------------------------------------------------------------ */
+.jb-hero {
+    padding: clamp(60px, 11vh, 150px) clamp(20px, 4vw, 60px) clamp(50px, 9vh, 120px);
+    text-align: center;
+}
+
+.jb-hero-inner {
+    /* 줄 리빌 타이밍 (--reveal-* 는 공용 .txt-sheen이 스윕 시작 시점 계산에 사용) */
+    --reveal-dur: 1.1s;
+    --jb-step: .16s;
+}
+
+.jb-label {
+    font-size: clamp(12px, .9vw, 15px);
+    color: var(--jb-gray);
+    --reveal-delay: 0s;
+}
+
+.jb-title {
+    margin-top: clamp(14px, 2vw, 34px);
+    font-size: clamp(21px, 2.3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    color: var(--jb-navy);
+}
+
+.jb-title-line {
+    display: block;
+    --reveal-delay: var(--jb-step);
+}
+
+.jb-sub {
+    margin-top: clamp(8px, 1vw, 16px);
+    font-size: clamp(12px, .95vw, 17px);
+    color: var(--jb-gray);
+    --reveal-delay: calc(var(--jb-step) * 2);
+}
+
+/* 줄 단위 마스크 리빌 (스윕 줄은 공용 .txt-sheen이 리빌까지 처리) */
+.jb-label,
+.jb-sub {
+    animation: heroLineUp var(--reveal-dur) cubic-bezier(.16, .8, .3, 1) var(--reveal-delay) both;
+}
+
+/* 공용 스윕은 흰 글자 기준이라 네이비용으로 색만 교체 (동작·타이밍은 그대로) */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .jb-title-line.txt-sheen {
+        background-image: linear-gradient(110deg, var(--jb-navy) 42%, var(--point) 50%, var(--jb-navy) 58%);
+        filter: none;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   임시 토글 버튼 (DEV — 배포 시 HTML 블록째 삭제)
+   ------------------------------------------------------------ */
+.jb-dev {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px) 18px;
+}
+
+.jb-dev-btn {
+    padding: 7px 14px;
+    border: 1px dashed #c26a1a;
+    border-radius: 6px;
+    background: #fff5e8;
+    font-size: 13px;
+    color: #c26a1a;
+}
+
+
+/* ------------------------------------------------------------
+   본문
+   ------------------------------------------------------------ */
+.jb-body {
+    padding-bottom: clamp(70px, 12vh, 180px);
+}
+
+.jb-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+.jb-count {
+    font-size: clamp(15px, 1.3vw, 24px);
+    font-weight: 500;
+    color: var(--jb-navy);
+}
+
+.jb-num {
+    font-weight: 700;
+    color: var(--point);
+}
+
+/* 건수 : 있음이면 4건, 없음이면 0건 */
+.jb-n-off {
+    display: none;
+}
+
+.is-empty .jb-n-on {
+    display: none;
+}
+
+.is-empty .jb-n-off {
+    display: inline;
+}
+
+/* 좌 필터 + 우 결과 */
+.jb-wrap {
+    display: grid;
+    grid-template-columns: clamp(200px, 21vw, 290px) 1fr;
+    gap: clamp(20px, 3vw, 56px);
+    margin-top: clamp(20px, 2.4vw, 40px);
+}
+
+
+/* ------------------------------------------------------------
+   좌측 필터
+   ------------------------------------------------------------ */
+.jb-filter {
+    align-self: start;
+    padding: clamp(14px, 1.6vw, 28px) clamp(12px, 1.4vw, 24px);
+    background: var(--jb-box);
+    border-radius: clamp(10px, 1vw, 18px);
+}
+
+.fl-group+.fl-group {
+    margin-top: clamp(18px, 2.2vw, 36px);
+}
+
+/* 그룹 헤더 : 클릭하면 접기/펼치기 */
+.fl-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 4px 2px;
+    font-size: clamp(14px, 1.05vw, 19px);
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--jb-navy);
+    text-align: left;
+}
+
+/* chevron : 테두리 두 변을 회전 (기본 ^ = 펼침) */
+.fl-arrow {
+    flex: none;
+    width: 9px;
+    height: 9px;
+    margin-right: 4px;
+    border-top: 2px solid var(--jb-navy);
+    border-right: 2px solid var(--jb-navy);
+    transform: rotate(-45deg) translate(-2px, 2px);
+    transition: transform .3s ease;
+}
+
+/* 접힘 : 화살표 뒤집고 목록 닫음 */
+.fl-group:not(.is-open) .fl-arrow {
+    transform: rotate(135deg) translate(-2px, 2px);
+}
+
+.fl-list {
+    overflow: hidden;
+    max-height: 300px;
+    margin-top: clamp(10px, 1.2vw, 18px);
+    padding-left: 6px;
+    transition: max-height .3s ease, margin-top .3s ease, opacity .3s ease;
+}
+
+.fl-group:not(.is-open) .fl-list {
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+}
+
+.fl-list li+li {
+    margin-top: clamp(6px, .7vw, 11px);
+}
+
+.fl-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: clamp(12px, .9vw, 16px);
+    color: #5f6672;
+    cursor: pointer;
+}
+
+/* 커스텀 체크박스 : 기본 모양을 지우고 직접 그림 */
+.fl-item input {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #c3c6cd;
+    border-radius: 3px;
+    background: #fff;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease;
+}
+
+.fl-item input:checked {
+    border-color: var(--point);
+    background: var(--point);
+}
+
+/* 체크 표시 : 두 변만 남긴 사각형을 기울임 */
+.fl-item input:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.fl-item input:focus-visible {
+    outline: 2px solid var(--point);
+    outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   우측 : 채용 카드
+   ------------------------------------------------------------ */
+.jb-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 1.6vw, 26px);
+}
+
+.jb-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(18px, 1.9vw, 32px) clamp(16px, 1.8vw, 30px) clamp(14px, 1.5vw, 24px);
+    background: #fff;
+    border: 1px solid var(--jb-line);
+    border-radius: clamp(8px, .8vw, 14px);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+/* 부서 배지 */
+.jb-dept {
+    align-self: flex-start;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: #e7eefb;
+    font-size: clamp(10px, .78vw, 13px);
+    color: #4b6ea8;
+}
+
+.jb-job {
+    margin-top: clamp(12px, 1.3vw, 22px);
+    font-size: clamp(16px, 1.35vw, 25px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #1d2b45;
+}
+
+.jb-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: clamp(10px, 1.1vw, 18px);
+}
+
+.jb-tag {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #f3f3f5;
+    font-size: clamp(10px, .78vw, 13px);
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+/* 하단 : 마감 · 자세히 보기 */
+.jb-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: clamp(20px, 2.6vw, 44px);
+}
+
+.jb-due {
+    font-size: clamp(10px, .8vw, 13px);
+    color: #9aa0a8;
+}
+
+.jb-due em {
+    margin-left: 4px;
+    font-style: normal;
+    color: #6b7280;
+}
+
+.jb-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(11px, .85vw, 14px);
+    font-weight: 700;
+    color: var(--point);
+    white-space: nowrap;
+}
+
+.jb-arrow {
+    transition: transform .3s ease;
+}
+
+/* 호버 : 주황 테두리 + 살짝 떠오름 (ref7 4번째 카드 상태) */
+@media (hover: hover) and (pointer: fine) {
+    .js .jb-card.is-in:hover,
+    .jb-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--point);
+        box-shadow: 0 10px 26px rgba(240, 138, 30, .16);
+    }
+
+    .jb-card:hover .jb-arrow {
+        transform: translateX(3px);
+    }
+}
+
+/* 리빌이 끝나면 카드 트랜지션을 호버용으로 넘겨받음 */
+@media (hover: hover) and (pointer: fine) {
+    .js .jb-card.is-in {
+        transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   없음 상태
+   ------------------------------------------------------------ */
+.jb-empty {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(300px, 42vh, 520px);
+    text-align: center;
+}
+
+.jb-empty-icon {
+    width: clamp(64px, 6vw, 104px);
+    height: auto;
+    opacity: .75;
+}
+
+.jb-empty-txt {
+    margin-top: clamp(20px, 2.6vw, 44px);
+    font-size: clamp(17px, 2.3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #d6d3ce;
+}
+
+/* 전환 : 카드 감추고 empty 노출 */
+.is-empty .jb-grid {
+    display: none;
+}
+
+.is-empty .jb-empty {
+    display: flex;
+}
+
+/* 없음일 때 필터는 그대로 두되 톤만 살짝 흐리게
+   (.js .reveal.is-in 이 opacity:1을 잡고 있어 같은 단계로 맞춤) */
+.js .is-empty .jb-filter,
+.is-empty .jb-filter {
+    opacity: .78;
+}
+
+
+/* ------------------------------------------------------------
+   반응형
+   ------------------------------------------------------------ */
+/* 태블릿 : 필터 폭만 줄임 */
+@media (max-width: 1024px) {
+    .jb-wrap {
+        grid-template-columns: 200px 1fr;
+        gap: 20px;
+    }
+
+    .jb-grid {
+        gap: 14px;
+    }
+}
+
+/* 모바일 : 필터를 위로 빼고 카드 1열 */
+@media (max-width: 768px) {
+    .jb-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .jb-filter {
+        /* 그룹을 2열로 접어 세로 길이를 줄임 */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 18px;
+    }
+
+    .fl-group+.fl-group {
+        margin-top: 0;
+    }
+
+    .jb-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jb-empty {
+        min-height: 280px;
+    }
+}
+
+/* 초소형(SE 등) : 필터 1열로 되돌리고 여백·폰트 축소 */
+@media (max-width: 480px) {
+    .jb-filter {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .jb-card {
+        padding: 16px 14px 12px;
+    }
+
+    .jb-foot {
+        margin-top: 18px;
+    }
+
+    .jb-tag {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .jb-empty-txt {
+        font-size: clamp(15px, 4.6vw, 22px);
+    }
+}
+
+@media (max-width: 360px) {
+
+    .jb-hero,
+    .jb-inner,
+    .jb-dev {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* 태그가 길어 줄바꿈되면 좌측 정렬로 흘림 */
+    .jb-foot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+
+/* 모션 최소화 : 리빌 없이 즉시 표시 */
+@media (prefers-reduced-motion: reduce) {
+
+    .jb-label,
+    .jb-sub,
+    .jb-title-line {
+        animation: none;
+    }
+
+    .fl-list,
+    .jb-card,
+    .jb-arrow {
+        transition: none;
+    }
+}

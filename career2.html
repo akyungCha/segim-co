@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | 채용 안내</title>
+  <meta name="description" content="새김교육(주) 채용 안내 - 조직 문화, 복리후생, 채용절차">
+  <link rel="stylesheet" href="/resource/css/index.css">
+  <link rel="stylesheet" href="/resource/css/career2.css">
+  <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
+  <script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link on" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+
+    <!-- ========== Careers 서브 탭 ========== -->
+    <nav class="ca-tab" aria-label="Careers 하위메뉴">
+      <div class="ca-tab-inner">
+        <a class="ca-tab-link" href="/career">인재상</a>
+        <a class="ca-tab-link on" href="/career2" aria-current="page">채용 안내</a>
+        <a class="ca-tab-link" href="/career3">채용공고</a>
+      </div>
+    </nav>
+
+    <main class="rc">
+
+      <!-- ========== 섹션 1 : 조직 문화 ========== -->
+      <section class="rc-sec rc-culture">
+        <div class="rc-inner">
+
+          <div class="rc-head">
+            <p class="rc-label reveal">조직 문화</p>
+            <h1 class="rc-title reveal" style="--d:.08s">더 깊게, 더 치열하게, <span class="rc-point">끝까지.</span></h1>
+            <p class="rc-sub reveal" style="--d:.16s">이것이 우리가 일하는 방식입니다.</p>
+          </div>
+
+          <!-- 카드 : 이동 없이 투명도만, 왼쪽부터 순차 (career2.js가 .is-in 부여) -->
+          <div class="cu-cards" id="cuCards">
+
+            <div class="cu-card">
+              <p class="cu-no">01</p>
+              <p class="cu-label">본질</p>
+              <p class="cu-name">더 깊게</p>
+              <p class="cu-desc">작고 사소해 보이는 일도 대충 넘기지 않습니다.</br> 보이는 것 너머의 본질을 파고들어,</br> 새로운 관점과 더 나은 대안을 찾습니다.</p>
+            </div>
+
+            <div class="cu-card">
+              <p class="cu-no">02</p>
+              <p class="cu-label">몰입</p>
+              <p class="cu-name">더 치열하게</p>
+              <p class="cu-desc">익숙한 기준에 머무르지 않습니다. </br>한계를 뛰어넘기 위해 주도적으로 몰입하고, </br>가진 역량을 남김없이 쏟아냅니다.</p>
+            </div>
+
+            <div class="cu-card">
+              <p class="cu-no">03</p>
+              <p class="cu-label">성취</p>
+              <p class="cu-name">끝까지</p>
+              <p class="cu-desc">시작한 일은 끝까지 해냅니다. </br>성과로 증명하고,</br> 그 경험을 더 큰 성취로 이어갑니다.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========== 섹션 2 : 복리후생 ========== -->
+      <section class="rc-sec rc-welfare">
+        <div class="rc-inner">
+
+          <div class="rc-head">
+            <p class="rc-label reveal">복리후생</p>
+            <h2 class="rc-title reveal" style="--d:.08s">오늘에 새기는 행복</h2>
+            <p class="rc-sub reveal" style="--d:.16s">함께 꿈꾸는 미래만큼, 오늘을 더 건강하고 행복하게</p>
+          </div>
+
+          <div class="wf-grid">
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/1.png" alt=""></span>
+              <p class="wf-name">시차출퇴근</p>
+              <p class="wf-desc">8~10시 사이 자유롭게 출근! </br>내 리듬에 맞춘 유연한 시작</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/2.png" alt=""></span>
+              <p class="wf-name">점심 식사 제공</p>
+              <p class="wf-desc">구내식당 2곳 중 선택 </br>다양한 메뉴로 든든한 한 끼</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/3.png" alt=""></span>
+              <p class="wf-name">리프레시 &amp; 스낵바</p>
+              <p class="wf-desc">취향 저격 간식과 커피로 에너지 충전</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/4.png" alt=""></span>
+              <p class="wf-name">자유로운 휴가</p>
+              <p class="wf-desc">연차·반차 자유 사용 </br>전자결재로 편리하게</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/5.png" alt=""></span>
+              <p class="wf-name">생일 조기퇴근</p>
+              <p class="wf-desc">생일에는 2시간 일찍 퇴근 </br>소중한 날은 더 여유롭게</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/6.png" alt=""></span>
+              <p class="wf-name">운동·문화비 지원</p>
+              <p class="wf-desc">운동부터 공연 관람까지 </br>다채로운 취미 생활 지원</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/7.png" alt=""></span>
+              <p class="wf-name">작은 도서관</p>
+              <p class="wf-desc">동료들의 추천 도서와 인사이트를 </br>함께 나누는 공간</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/8.png" alt=""></span>
+              <p class="wf-name">휴식 공간</p>
+              <p class="wf-desc">운동 기구와 안마 의자가 마련된 </br>테라스에서 편안한 휴식</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/9.png" alt=""></span>
+              <p class="wf-name">경조사 지원</p>
+              <p class="wf-desc">기쁜 순간도 슬픈 순간도 </br>진심을 담아 나누는 마음</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/10.png" alt=""></span>
+              <p class="wf-name">명절 선물</p>
+              <p class="wf-desc">명절마다 마음을 담아 전하는</br> 따뜻하고 풍성한 선물</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/11.png" alt=""></span>
+              <p class="wf-name">회식비 지원</p>
+              <p class="wf-desc">강요 없는 자율 회식 </br>부서별 단합을 위한 회식비 지원</p>
+            </div>
+
+            <div class="wf-card reveal">
+              <span class="wf-icon"><img src="/resource/imgs/career/12.png" alt=""></span>
+              <p class="wf-name">성과 포상</p>
+              <p class="wf-desc">도전과제 달성 시 포상금 지급</br> 해낸 만큼 확실하게</p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========== 섹션 3 : 채용절차 ========== -->
+      <section class="rc-sec rc-step">
+        <div class="rc-inner">
+
+          <div class="rc-head">
+            <p class="rc-label reveal">채용절차</p>
+            <h2 class="rc-title reveal" style="--d:.08s">합류 여정</h2>
+            <p class="rc-sub reveal" style="--d:.16s">
+              새김교육은 단순한 교육을 넘어 소통하는 영어를 위해 일합니다.<br>
+              세상을 향해 함께 이름을 새겨 나갈 준비가 되었다면 지원하세요.
+            </p>
+          </div>
+
+          <!-- 왼쪽부터 하나씩 등장, 마지막 원은 주황이 아래에서 차오름 -->
+          <div class="st-flow" id="stFlow">
+
+            <div class="st-node">
+              <span class="st-step">Step 1</span>
+              <span class="st-name">서류전형</span>
+            </div>
+
+            <span class="st-arrow" aria-hidden="true"></span>
+
+            <div class="st-node">
+              <span class="st-step">Step 2</span>
+              <span class="st-name">면접전형</span>
+            </div>
+
+            <span class="st-arrow" aria-hidden="true"></span>
+
+            <div class="st-node st-final">
+              <span class="st-fill" aria-hidden="true"></span>
+              <span class="st-name">최종 합격</span>
+            </div>
+
+          </div>
+
+          <!-- 유의사항 -->
+          <div class="st-note reveal">
+            <p class="st-note-title">유의사항</p>
+            <ul class="st-note-list">
+              <li>서류전형 합격자에 한해 다음 전형이 개별 안내됩니다.</li>
+              <li>채용절차는 직무에 따라 일부 변경될 수 있습니다.</li>
+              <li>지원서 및 제출 서류 내용이 사실과 다를 경우 채용이 취소될 수 있습니다.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+  <script src="/resource/js/career2.js"></script>
+</body>
+</html>

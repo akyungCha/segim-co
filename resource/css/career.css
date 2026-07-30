@@ -1,0 +1,575 @@
+@charset "utf-8";
+
+/* ============================================================
+   [Careers] 인재상 — 스티키 스택 3섹션 + 레이더 차트
+   ============================================================ */
+:root {
+    --ca-navy: #1f3050;
+    --ca-cream: #faf8f3;
+    --ca-desc: #8a9099;
+    --ca-tab-h: 52px;
+}
+
+
+/* Careers 서브 탭(.ca-tab*)은 채용 안내·채용공고와 공용이라 index.css로 옮김 */
+
+
+/* ------------------------------------------------------------
+   페이드 스루 무대
+   활주로(.ca-stage)를 길게 잡고 화면(.ca-viewport)은 고정 →
+   스크롤이 진행되는 동안 색이 차오르고 그 위로 다음 장면이 떠오름
+   ------------------------------------------------------------ */
+.ca-stage {
+    position: relative;
+    /* 씬 2개 × 약 240vh — 전환에 쓸 스크롤 거리 */
+    height: 480vh;
+}
+
+.ca-viewport {
+    position: sticky;
+    top: 0;
+    height: var(--app-h, 100vh);
+    height: 100dvh;
+    overflow: hidden;
+}
+
+/* 씬은 모두 같은 화면에 겹쳐 둠 (이동 없이 opacity로만 교체) */
+.ca-scene {
+    position: absolute;
+    inset: 0;
+}
+
+.ca-scene-1 {
+    z-index: 1;
+}
+
+/* 색 오버레이 : opacity는 career.js가 스크롤 진행률에 맞춰 0 → 1 */
+.ca-veil {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 씬 1을 덮는 색 = 씬 2의 배경 */
+.ca-veil-1 {
+    z-index: 2;
+    background: #0a0d12;
+}
+
+/* 덮인 색 위에서 떠오름 */
+.ca-scene-2 {
+    z-index: 3;
+    opacity: 0;
+}
+
+/* 씬 2를 덮는 색 = 섹션 3의 크림 (이 색으로 가득 찬 뒤 인재상 섹션으로 이어짐) */
+.ca-veil-2 {
+    z-index: 4;
+    background: var(--ca-cream);
+}
+
+
+/* ------------------------------------------------------------
+   섹션 1 : 메인 배너
+   ------------------------------------------------------------ */
+.ca-ban {
+    display: flex;
+    align-items: center;
+    background: #cfd6e2 url('../imgs/career/career1.png') no-repeat center center / cover;
+}
+
+/* 스크림 : 좌측이 살짝 밝아져 네이비 카피가 뜨게 */
+.ca-ban::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(100deg, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, .12) 42%, rgba(255, 255, 255, 0) 72%),
+        linear-gradient(180deg, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, 0) 40%);
+}
+
+.ca-ban-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    /* 카피를 화면 중앙보다 살짝 위로 (ref5 배치) */
+    padding: 0 clamp(20px, 4vw, 60px) clamp(60px, 16vh, 190px);
+    /* 줄 리빌 타이밍 : 길게 잡아 은은하게 */
+    --reveal-dur: 1.8s;
+    --ca-step: .24s;
+}
+
+.ca-lead {
+    font-size: clamp(14px, 1.6vw, 30px);
+    font-weight: 400;
+    letter-spacing: .01em;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .3);
+}
+
+.ca-title {
+    margin-top: clamp(8px, 1vw, 18px);
+    font-size: clamp(26px, 3.3vw, 62px);
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -.02em;
+    color: var(--ca-navy);
+}
+
+.ca-title .hero-line,
+.ca-title-line {
+    display: block;
+}
+
+.ca-sub {
+    margin-top: clamp(14px, 2vw, 38px);
+    font-size: clamp(12px, 1vw, 19px);
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+}
+
+/* 순차 스태거 : 리드 → 타이틀 1줄 → 2줄 → 서브 */
+.ca-lead {
+    --reveal-delay: 0s;
+}
+
+.ca-title-line {
+    --reveal-delay: var(--ca-step);
+}
+
+.ca-title-2 {
+    --reveal-delay: calc(var(--ca-step) * 2);
+}
+
+.ca-sub {
+    --reveal-delay: calc(var(--ca-step) * 3);
+}
+
+/* 줄 단위 마스크 리빌 : 천천히 올라오도록 감속 커브를 완만하게 */
+.ca-lead,
+.ca-sub,
+.ca-title-line {
+    animation: heroLineUp var(--reveal-dur) cubic-bezier(.16, .8, .3, 1) var(--reveal-delay) both;
+}
+
+
+/* ------------------------------------------------------------
+   섹션 2 : 선언 문구 + 버블
+   ------------------------------------------------------------ */
+.ca-decl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 clamp(20px, 5vw, 60px);
+    background: #10131a url('../imgs/career/career2.png') no-repeat center center / cover;
+}
+
+.ca-decl-txt {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(20px, 2.5vw, 46px);
+    font-weight: 400;
+    letter-spacing: -.015em;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, .35);
+}
+
+.ca-decl-point {
+    font-weight: 700;
+}
+
+/* 선언 문구 : 장면이 자리잡은 뒤 떠오름 (career.js가 .is-on 부여) */
+.js .ca-scene-2 .ca-decl-txt {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.js .ca-scene-2.is-on .ca-decl-txt {
+    opacity: 1;
+    transform: none;
+}
+
+/* 버블 : 원본 한 장을 하단 전체에 깔고 페이드인만 (이동 없음)
+   이미지가 검은 배경이라 screen으로 합성해 밝은 부분만 남김 */
+.ca-bubbles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: url('../imgs/career/career_bubble.png') no-repeat center bottom / 100% auto;
+    mix-blend-mode: screen;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.8s ease-out;
+}
+
+.ca-bubbles.is-on {
+    opacity: .85;
+}
+
+
+/* ------------------------------------------------------------
+   섹션 3 : 인재상 + 레이더 차트
+   ------------------------------------------------------------ */
+.ca-talent {
+    /* 마지막 섹션은 내용이 길어질 수 있어 높이를 고정하지 않음 */
+    position: relative;
+    height: auto;
+    /* 화면보다 항상 크게 잡아 스크롤하자마자 푸터가 붙지 않도록 */
+    min-height: calc(var(--app-h, 100vh) * 1.2);
+    min-height: 120dvh;
+    display: flex;
+    align-items: center;
+    padding: clamp(130px, 28vh, 340px) clamp(20px, 4vw, 60px);
+    background: var(--ca-cream);
+}
+
+/* 차트를 가운데 두고 3종을 상단·좌하·우하에 배치 */
+.ca-radar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    justify-items: center;
+    width: 100%;
+    /* 큰 모니터에서 과하게 퍼지지 않게 그룹 폭을 제한 */
+    max-width: 1120px;
+    margin: 0 auto;
+    /* 차트 한 변 (정사각) — 텍스트 위치 계산에 재사용.
+       화면이 낮을 때를 대비해 뷰포트 높이로도 한 번 더 제한 */
+    --chart: min(clamp(240px, 25vw, 490px), 52vh);
+}
+
+.ca-chart {
+    grid-column: 2;
+    grid-row: 2;
+    width: var(--chart);
+}
+
+.ca-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* 동심원 + 축선 */
+.rc-grid circle {
+    fill: none;
+    stroke: #d8dbe1;
+    stroke-width: 1;
+}
+
+.rc-grid line {
+    stroke: #d8dbe1;
+    stroke-width: 1;
+}
+
+.rc-area {
+    fill: rgba(240, 138, 30, .38);
+}
+
+.rc-dot {
+    fill: var(--point);
+}
+
+/* 인재상 블록 */
+.ca-item {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(9px, 1vw, 16px);
+    max-width: clamp(200px, 21vw, 310px);
+}
+
+/* 상단 꼭짓점이 차트 박스 맨 위에 닿아 있어 이 여백이 곧 꼭짓점과의 간격 */
+.ca-item-value {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 20px;
+}
+
+/* 좌우 블록 : 아래 꼭짓점 높이(차트 위에서 75%)에 맞추고, 가로로도 당겨 붙임 */
+.ca-item-trust,
+.ca-item-future {
+    grid-row: 2;
+    margin-bottom: calc(var(--chart) * .25 - 2.4em);
+}
+
+/* 박스 모서리에서 아래 꼭짓점까지가 차트 폭의 6.69%라, 그만큼 당기고 20px만 남김 */
+.ca-item-trust {
+    grid-column: 1;
+    justify-self: end;
+    margin-right: calc(20px - var(--chart) * .0669);
+}
+
+/* Future는 아이콘이 박스 왼쪽에 딱 붙어 20px이 그대로 보이는 반면,
+   Trust는 설명 문구가 줄바꿈되며 박스 안에 여유가 남아 더 떨어져 보임.
+   → 이쪽만 간격을 차트 폭의 9%로 벌려 좌우 균형을 맞춤 */
+.ca-item-future {
+    grid-column: 3;
+    justify-self: start;
+    margin-left: calc(var(--chart) * .09 - var(--chart) * .0669);
+}
+
+.ca-item-icon {
+    flex: none;
+    width: clamp(32px, 2.9vw, 56px);
+    height: auto;
+}
+
+.ca-item-label {
+    font-size: clamp(10px, .72vw, 13px);
+    font-weight: 400;
+    color: var(--ca-desc);
+}
+
+.ca-item-name {
+    margin-top: 2px;
+    font-size: clamp(14px, 1.05vw, 19px);
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--ca-navy);
+}
+
+.ca-item-desc {
+    margin-top: clamp(5px, .6vw, 10px);
+    font-size: clamp(10px, .68vw, 12.5px);
+    line-height: 1.65;
+    color: var(--ca-desc);
+}
+
+
+/* ---- 차트 등장 : 그리드 → 삼각형 → 꼭짓점 → 텍스트 ---- */
+.js .ca-radar .rc-grid,
+.js .ca-radar .rc-area,
+.js .ca-radar .rc-dot,
+.js .ca-radar .ca-item {
+    opacity: 0;
+}
+
+.js .ca-radar .rc-grid {
+    transition: opacity .5s ease-out;
+}
+
+/* 가운데에서 바깥으로 확장 (끝에서 살짝 오버슈트) */
+.js .ca-radar .rc-area {
+    transform: scale(0);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity .2s ease-out .45s, transform 1.1s cubic-bezier(.34, 1.56, .64, 1) .45s;
+}
+
+.js .ca-radar .rc-dot {
+    transform: scale(0);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity .3s ease-out, transform .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.js .ca-radar .ca-item {
+    transform: translateY(16px);
+    transition: opacity .7s ease-out, transform .7s ease-out;
+}
+
+.js .ca-radar.is-in .rc-grid,
+.js .ca-radar.is-in .rc-area,
+.js .ca-radar.is-in .rc-dot,
+.js .ca-radar.is-in .ca-item {
+    opacity: 1;
+    transform: none;
+}
+
+/* 꼭짓점 : 상단 → 좌하 → 우하 */
+.js .ca-radar.is-in .rc-dot-1 { transition-delay: 1.3s }
+.js .ca-radar.is-in .rc-dot-2 { transition-delay: 1.45s }
+.js .ca-radar.is-in .rc-dot-3 { transition-delay: 1.6s }
+
+/* 텍스트도 같은 순서로 */
+.js .ca-radar.is-in .ca-item-value  { transition-delay: 1.45s }
+.js .ca-radar.is-in .ca-item-trust  { transition-delay: 1.6s }
+.js .ca-radar.is-in .ca-item-future { transition-delay: 1.75s }
+
+
+/* ------------------------------------------------------------
+   반응형
+   ------------------------------------------------------------ */
+
+
+   @media (max-width: 1024px) {
+    .ca-item {
+        max-width: clamp(200px, 30vw, 320px);
+    }
+
+    .ca-item-desc {
+        font-size: clamp(11px, 1.1vw, 13px);
+    }
+}
+
+/* 모바일 : 차트 없이 인재상 카드 3장만 세로로 */
+@media (max-width: 768px) {
+    .ca-radar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(12px, 2vh, 18px);
+    }
+
+    /* 차트는 렌더링 자체를 제외 (career.js도 모바일에선 애니메이션을 걸지 않음) */
+    .ca-chart {
+        display: none;
+    }
+
+    /* 꼭짓점 정렬용 여백을 모두 해제하고 카드 형태로 */
+    .ca-item,
+    .ca-item-value,
+    .ca-item-trust,
+    .ca-item-future {
+        width: 100%;
+        max-width: 480px;
+        margin: 0;
+        justify-self: auto;
+        padding: clamp(16px, 4.5vw, 24px);
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+    }
+
+    /* 카드 안에서는 글자를 조금 키워 읽기 편하게 */
+    .ca-item-icon {
+        width: clamp(34px, 9vw, 46px);
+    }
+
+    .ca-item-label {
+        font-size: clamp(11px, 3vw, 13px);
+    }
+
+    .ca-item-name {
+        font-size: clamp(15px, 4.2vw, 19px);
+    }
+
+    .ca-item-desc {
+        font-size: clamp(12px, 3.3vw, 14px);
+    }
+
+    /* 카드는 공용 .reveal로 위에서부터 순차 등장 (--d는 HTML 인라인) */
+    .js .ca-radar .ca-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity .6s ease-out, transform .6s ease-out;
+        transition-delay: var(--d, 0s);
+    }
+
+    .js .ca-radar .ca-item.is-in {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* 세로 스택이라 이미 길어짐 — 여백은 조금만 */
+    .ca-talent {
+        padding-top: clamp(70px, 11vh, 140px);
+        padding-bottom: clamp(70px, 11vh, 140px);
+    }
+}
+
+@media (max-width: 640px) {
+    .ca-lead {
+        font-size: clamp(13px, 3.6vw, 18px);
+    }
+
+    .ca-title {
+        font-size: clamp(24px, 7.2vw, 36px);
+    }
+
+    .ca-sub {
+        font-size: clamp(12px, 3.2vw, 15px);
+    }
+
+    .ca-decl-txt {
+        font-size: clamp(19px, 5.4vw, 28px);
+    }
+
+    /* 좁은 화면에선 버블이 과하게 커 보이지 않도록 */
+    .ca-bubbles {
+        background-size: 190% auto;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .ca-ban-inner,
+    .ca-tab-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .ca-item {
+        gap: 10px;
+    }
+}
+
+
+
+/* ------------------------------------------------------------
+   모션 최소화 : 고정·물들기 없이 일반 스크롤 섹션으로
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+
+    /* 활주로를 걷고 두 씬을 위아래로 나열 */
+    .ca-stage {
+        height: auto;
+    }
+
+    .ca-viewport {
+        position: static;
+        height: auto;
+    }
+
+    .ca-scene {
+        position: relative;
+        inset: auto;
+        height: 100vh;
+    }
+
+    .ca-scene-2 {
+        opacity: 1;
+    }
+
+    .ca-veil {
+        display: none;
+    }
+
+    /* 버블·선언 문구는 즉시 표시 */
+    .ca-bubbles {
+        opacity: .85;
+        transition: none;
+    }
+
+    .js .ca-scene-2 .ca-decl-txt {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .ca-lead,
+    .ca-sub,
+    .ca-title-line {
+        animation: none;
+    }
+
+    /* 차트는 완성 상태로 즉시 표시 */
+    .js .ca-radar .rc-grid,
+    .js .ca-radar .rc-area,
+    .js .ca-radar .rc-dot,
+    .js .ca-radar .ca-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

@@ -1,0 +1,822 @@
+@charset "utf-8";
+
+/* ============================================================
+   [웹폰트] Pretendard — 로컬 호스팅 (resource/fonts)
+   swap : 폰트 로드 전에는 대체 폰트로 먼저 보여줌
+   ============================================================ */
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/Pretendard-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/Pretendard-Medium.woff2') format('woff2');
+}
+
+/* 600~800 요청은 이 Bold(700)로 매칭됨 */
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/Pretendard-Bold.woff2') format('woff2');
+}
+
+
+/* ============================================================
+   [기본 설정]
+   ============================================================ */
+:root {
+    --point: #f08a1e;
+    --navy: #22355c;
+    --text: #222222;
+    --text-sub: #8a9099;
+    --line: #e8eaee;
+    --gnb-h: 84px;
+    /* 헤더 하단 2depth 서브 바 높이 */
+    --subbar-h: 58px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+    color: var(--text);
+    background: #fff;
+    line-height: 1.5;
+    word-break: keep-all;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   [공통 GNB]
+   ============================================================ */
+.gnb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: var(--gnb-h);
+    background: #fff;
+    transition: box-shadow .3s ease;
+}
+
+.gnb.is-scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+}
+
+.gnb-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+/* 로고 : 왼쪽 고정 */
+.gnb-logo {
+    position: absolute;
+    left: clamp(20px, 4vw, 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+}
+
+.gnb-logo img {
+    width: auto;
+    height: clamp(24px, 2.4vw, 34px);
+}
+
+/* 메뉴 리스트 : 항목이 헤더 높이를 꽉 채워야 2depth가 헤더 바로 아래(top:100%)에 붙음
+   (nav → ul → li 로 height:100%가 이어져야 하므로 nav에도 높이 지정) */
+.gnb-menu {
+    height: 100%;
+}
+
+.menu-list {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: clamp(28px, 4.6vw, 84px);
+}
+
+.menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-link {
+    position: relative;
+    display: block;
+    padding: 8px 2px;
+    font-size: clamp(14px, 1.05vw, 17px);
+    font-weight: 400;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--text);
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+/* 1depth 활성 밑줄 : 글자 폭만큼 짧게, 가운데서 펼쳐짐 */
+.menu-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--point);
+    opacity: 0;
+    transform: scaleX(.4);
+    transition: transform .28s ease-out, opacity .28s ease-out;
+}
+
+/* 현재 페이지는 호버 없이도 상시 표시 */
+.menu-link.on {
+    color: var(--point);
+}
+
+.menu-link.on::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* 호버 표시는 마우스 기기에서만 */
+@media (hover: hover) and (pointer: fine) {
+
+    .menu-item:hover>.menu-link,
+    .menu-item.is-open>.menu-link {
+        color: var(--point);
+    }
+
+    .menu-item:hover>.menu-link::after,
+    .menu-item.is-open>.menu-link::after {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+
+/* ---- 2depth : 헤더 하단 전체 폭 서브 바 ---- */
+/* 바 배경 : 헤더 아래로 펼쳐지는 흰 판. 페이지 콘텐츠를 밀지 않고 위에 겹침 */
+.gnb::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    /* 닫힘 상태에선 아래 콘텐츠 클릭을 막지 않음 */
+    pointer-events: none;
+    transition: height .32s ease-out, opacity .32s ease-out;
+}
+
+.gnb.sub-open::after {
+    height: var(--subbar-h);
+    opacity: 1;
+    /* 열렸을 땐 헤더와 한 덩어리로 묶이는 호버 영역 */
+    pointer-events: auto;
+}
+
+/* 2depth 항목 : 부모 1depth의 x좌표에서 시작해 가로로 나열 */
+.sub-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* .gnb::after 배경보다 위 */
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    height: var(--subbar-h);
+    gap: clamp(20px, 2.4vw, 44px);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity .28s ease-out, transform .28s ease-out, visibility .28s;
+}
+
+.menu-item.is-open>.sub-list {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.sub-list a {
+    display: block;
+    font-size: clamp(14px, 1vw, 16px);
+    color: var(--navy);
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+.sub-list a:hover {
+    color: var(--point);
+}
+
+/* 모바일 전용 버튼 (PC 숨김) */
+.menu-btn,
+.sub-btn {
+    display: none;
+}
+
+
+/* ============================================================
+   [히어로] — 한 화면을 가득 채우는 섹션 1개
+   ============================================================ */
+
+.page {
+    padding-top: var(--gnb-h);
+}
+
+/* 쌓임 순서 : 배경 이미지 → 오버레이(z-index 1) → 텍스트(z-index 2) */
+.hero {
+    position: relative;
+    /* 오버레이·텍스트의 기준 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(var(--app-h, 100vh) - var(--gnb-h));
+    height: calc(100dvh - var(--gnb-h));
+    padding: 0 20px;
+    overflow: hidden;
+    background: #07090f url('../imgs/main.png') no-repeat center center / cover;
+}
+
+/* 다크 오버레이 : 배경 위, 텍스트 아래 / 클릭 통과 */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .30) 0%, rgba(0, 0, 0, .12) 45%, rgba(0, 0, 0, .28) 100%);
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    .hero-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 500px;
+        height: 500px;
+        margin: -250px 0 0 -250px;
+        pointer-events: none;
+        background: radial-gradient(circle,
+                rgba(255, 220, 160, .20) 0%,
+                rgba(255, 220, 160, .09) 35%,
+                rgba(255, 220, 160, 0) 70%);
+        mix-blend-mode: screen;
+        opacity: 0;
+        transition: opacity .45s ease;
+        will-change: transform;
+    }
+
+    /* 히어로 진입 시 페이드 인 */
+    .hero-glow.is-on {
+        opacity: 1;
+    }
+}
+
+/* 카피 : 오버레이 위 */
+.hero-copy {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    /* 리빌 타이밍 (그라데이션 스윕 시작 시점 계산에 재사용) */
+    --reveal-dur: 1.6s;
+    --reveal-delay: 1.00s;
+}
+
+/* 줄 마스크 : 넘치는 부분을 잘라 텍스트가 아래에서 올라오게 함 */
+.hero-line {
+    overflow: hidden;
+}
+
+.hero-line+.hero-line {
+    margin-top: clamp(8px, 1.2vw, 16px);
+}
+
+/* 로드 시 1회 리빌 : 마스크 아래(110%)에서 제자리로 */
+@keyframes heroLineUp {
+    from {
+        opacity: 0;
+        transform: translateY(110%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-sub,
+.hero-title {
+    animation: heroLineUp var(--reveal-dur) cubic-bezier(.22, 1, .36, 1) both;
+}
+
+/* 스태거 : 서브타이틀 먼저, 타이틀이 --reveal-delay 만큼 뒤 */
+.hero-title {
+    animation-delay: var(--reveal-delay);
+}
+
+.hero-sub {
+    font-size: clamp(16px, 2.1vw, 34px);
+    font-weight: 400;
+    letter-spacing: .01em;
+    color: var(--point);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .35);
+}
+
+.hero-title {
+    font-size: clamp(30px, 5.2vw, 74px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    color: #fff;
+    /* 미지원 브라우저 폴백 : 흰색 단색 + 그림자 */
+    text-shadow: 0 4px 24px rgba(0, 0, 0, .4);
+}
+
+
+
+@keyframes heroTitleSheen {
+
+    0% {
+        background-position: 100% 0;
+    }
+
+    55%,
+    100% {
+        background-position: 0% 0;
+    }
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .txt-sheen {
+        background-image: linear-gradient(110deg, #fff 40%, var(--point) 50%, #fff 60%);
+        background-repeat: no-repeat;
+        background-size: 250% 100%;
+        background-position: 100% 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        text-shadow: none;
+        filter: drop-shadow(0 4px 24px rgba(0, 0, 0, .4));
+        animation:
+            heroLineUp var(--reveal-dur) cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0s) both,
+            heroTitleSheen 4s ease-out calc(var(--reveal-delay, 0s) + var(--reveal-dur)) infinite;
+    }
+}
+
+/* 모션 최소화 설정 : 리빌·스윕 없이 흰색 텍스트로 즉시 표시 */
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-sub,
+    .hero-title,
+    .txt-sheen {
+        animation: none;
+    }
+
+    .txt-sheen {
+        background-image: none;
+        color: #fff;
+        -webkit-text-fill-color: #fff;
+        text-shadow: 0 4px 24px rgba(0, 0, 0, .4);
+        filter: none;
+    }
+
+    /* 마우스 글로우도 제거 (JS에서도 초기화하지 않음) */
+    .hero-glow {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   [Careers 서브 탭] — 인재상 / 채용 안내 / 채용공고 공용
+   ============================================================ */
+.ca-tab {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    --ca-tab-h: 52px;
+}
+
+.ca-tab-inner {
+    display: flex;
+    /* 레퍼런스처럼 우측 정렬 */
+    justify-content: flex-end;
+    gap: clamp(24px, 4vw, 76px);
+    width: 100%;
+    max-width: 1400px;
+    height: var(--ca-tab-h);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+.ca-tab-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: clamp(13px, 1vw, 16px);
+    color: #6b7280;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+/* 현재 페이지 : 주황 밑줄 */
+.ca-tab-link.on {
+    color: var(--point);
+}
+
+.ca-tab-link.on::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--point);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .ca-tab-link:hover {
+        color: var(--point);
+    }
+}
+
+/* 좁으면 가로 스크롤로 3개 유지 */
+@media (max-width: 640px) {
+    .ca-tab-inner {
+        justify-content: flex-start;
+        gap: 28px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ca-tab-inner::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   [공통 푸터] — 히어로 아래 일반 문서 흐름 (스크롤하면 노출)
+   ============================================================ */
+.footer {
+    width: 100%;
+    padding: clamp(30px, 4vw, 48px) 0;
+    background: #f7f8f9;
+    border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+/* 약관 링크 */
+.footer-link {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px clamp(20px, 3vw, 44px);
+    margin-bottom: clamp(20px, 3vw, 40px);
+}
+
+.footer-link a {
+    font-size: clamp(13px, 1vw, 15px);
+    font-weight: 500;
+    color: #444;
+    transition: color .2s ease;
+}
+
+.footer-link a:hover {
+    color: var(--point);
+}
+
+/* 사업자 정보 */
+.footer-info p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px clamp(14px, 2vw, 30px);
+    margin-top: 8px;
+    font-size: clamp(12px, .92vw, 15px);
+    color: var(--text-sub);
+}
+
+.footer-info p:first-child {
+    margin-top: 0;
+}
+
+
+/* ============================================================
+   [스크롤 리빌] — 모든 페이지 공용
+   .reveal 요소가 화면에 들어오면 common.js가 .is-in 부여 (1회)
+   개별 지연은 인라인 --d 로 (예: style="--d:.12s")
+   ============================================================ */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease-out, transform .6s ease-out;
+    transition-delay: var(--d, 0s);
+}
+
+.js .reveal.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+/* 모션 최소화 설정 : 애니메이션 없이 바로 보이게 */
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/* ============================================================
+   [반응형] 1024px 이하
+   ============================================================ */
+@media (max-width: 1024px) {
+    :root {
+        --gnb-h: 60px;
+    }
+
+    /* 햄버거 버튼 */
+    .menu-btn {
+        position: absolute;
+        right: clamp(16px, 4vw, 30px);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 30px;
+        height: 30px;
+        z-index: 2;
+    }
+
+    .menu-btn-bar {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--text);
+        transition: transform .3s ease, opacity .2s ease;
+    }
+
+    /* 열림 상태 → X 아이콘 */
+    body.menu-open .menu-btn-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    body.menu-open .menu-btn-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    body.menu-open .menu-btn-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* 전체메뉴 패널 (오른쪽에서 슬라이드) */
+    .gnb-menu {
+        position: fixed;
+        top: var(--gnb-h);
+        right: 0;
+        width: min(340px, 86vw);
+        height: calc(100% - var(--gnb-h));
+        padding: 10px 0 40px;
+        background: #fff;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: translateX(100%);
+        transition: transform .35s ease;
+    }
+
+    body.menu-open .gnb-menu {
+        transform: translateX(0);
+    }
+
+    /* 서브 바는 PC 전용 — 모바일은 아코디언 유지 */
+    .gnb::after {
+        display: none;
+    }
+
+    .menu-link::after {
+        display: none;
+    }
+
+    .menu-list {
+        display: block;
+        height: auto;
+    }
+
+    .menu-item {
+        display: block;
+        height: auto;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .menu-link {
+        padding: 18px clamp(20px, 5vw, 28px);
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    /* 하위메뉴 열기 버튼 (+ / − 모양) */
+    .sub-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        width: 58px;
+        height: 58px;
+    }
+
+    .sub-btn::before,
+    .sub-btn::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 13px;
+        height: 2px;
+        margin: -1px 0 0 -6.5px;
+        background: #666;
+        transition: transform .3s ease;
+    }
+
+    .sub-btn::after {
+        transform: rotate(90deg);
+    }
+
+    .menu-item.is-open .sub-btn::after {
+        transform: rotate(0);
+    }
+
+    /* 아코디언 : PC 서브 바 스타일(가로 flex·고정 높이)을 되돌림 */
+    .sub-list {
+        position: static;
+        display: block;
+        height: auto;
+        max-height: 0;
+        gap: 0;
+        padding: 0;
+        background: #fafbfc;
+        white-space: normal;
+        opacity: 1;
+        visibility: visible;
+        overflow: hidden;
+        transform: none;
+        transition: max-height .35s ease, padding .35s ease;
+    }
+
+    .menu-item.is-open>.sub-list {
+        max-height: 300px;
+        padding: 8px 0;
+        transform: none;
+    }
+
+    .sub-list a {
+        padding: 11px clamp(20px, 5vw, 28px);
+        font-size: 15px;
+        text-align: left;
+    }
+
+    /* 배경 딤 */
+    .menu-dim {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: rgba(0, 0, 0, .35);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s;
+    }
+
+    body.menu-open .menu-dim {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+/* ============================================================
+   [반응형] 640px 이하 : 소형 폰 (아이폰 SE 375×667 대응)
+   ============================================================ */
+@media (max-width: 640px) {
+    :root {
+        --gnb-h: 56px;
+    }
+
+    .gnb-logo img {
+        height: 22px;
+    }
+
+    .hero-sub {
+        font-size: clamp(14px, 4.4vw, 20px);
+    }
+
+    .hero-title {
+        font-size: clamp(26px, 8.6vw, 40px);
+    }
+
+    .footer-link {
+        gap: 8px 24px;
+        margin-bottom: 18px;
+    }
+
+    .footer-info p {
+        gap: 2px 14px;
+        line-height: 1.7;
+    }
+}
+
+@media (max-height: 700px) {
+    .hero-sub {
+        font-size: min(clamp(14px, 2.4vh, 22px), 4.6vw);
+    }
+
+    .hero-title {
+        font-size: min(clamp(24px, 5.6vh, 46px), 8.4vw);
+    }
+}
+
+/* 320px 초소형 폰 */
+@media (max-width: 360px) {
+    .gnb-menu {
+        width: 100%;
+    }
+
+    .footer-info p {
+        flex-direction: column;
+        gap: 3px;
+    }
+}

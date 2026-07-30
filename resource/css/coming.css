@@ -1,0 +1,191 @@
+@charset "utf-8";
+
+/* ============================================================
+   [Coming Soon] 페이지 준비중 — partnership / newsroom 공용
+   ============================================================ */
+:root {
+    --cm-bg: #faf8f3;
+    --cm-navy: #414d68;
+    --cm-txt: #b7bac2;
+    --cm-sub: #a9adb6;
+}
+
+
+/* GNB와 푸터 사이를 채워 세로 중앙 정렬 (내용이 짧아도 푸터가 올라오지 않게) */
+.coming {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(var(--app-h, 100vh) - var(--gnb-h));
+    min-height: calc(100dvh - var(--gnb-h));
+    padding: clamp(40px, 8vh, 100px) clamp(20px, 4vw, 60px);
+    background: var(--cm-bg);
+}
+
+.coming-inner {
+    width: 100%;
+    text-align: center;
+}
+
+/* 진입 페이드인 : 항상 첫 화면 안에 있는 콘텐츠라 스크롤 옵저버(.reveal) 대신 로드 애니메이션
+   — 옵저버가 늦게 돌면 페이지가 통째로 비어 보이므로 */
+.spin-wrap,
+.coming-title,
+.coming-sub {
+    animation: comingIn .8s ease-out both;
+}
+
+.coming-title {
+    animation-delay: .12s;
+}
+
+.coming-sub {
+    animation-delay: .24s;
+}
+
+@keyframes comingIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   스피너 : 블레이드 12개를 rotate로 원형 배치
+   ------------------------------------------------------------ */
+.spin-wrap {
+    position: relative;
+    width: var(--spin-size);
+    height: var(--spin-size);
+    margin: 0 auto;
+    /* 크기 기준값 — 블레이드·가운데 글자가 모두 이 값을 따라감 */
+    --spin-size: clamp(150px, 15vw, 230px);
+    --blade-w: calc(var(--spin-size) * .056);
+    --blade-h: calc(var(--spin-size) * .2);
+}
+
+/* 회전하는 건 이 컨테이너뿐 (가운데 글자는 바깥 레이어) */
+.spin {
+    position: absolute;
+    inset: 0;
+    /* 한 바퀴 시간 — 12로 나눈 값이 한 칸 넘어가는 간격 (1.8s = 150ms) */
+    animation: spinTick 1.8s steps(12) infinite;
+}
+
+.spin-blade {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: var(--blade-w);
+    height: var(--blade-h);
+    margin-left: calc(var(--blade-w) / -2);
+    border-radius: 999px;
+    background: var(--cm-navy);
+    /* 회전축을 컨테이너 중심으로 */
+    transform-origin: 50% calc(var(--spin-size) / 2);
+    transform: rotate(calc(var(--i) * 30deg));
+    opacity: var(--o);
+}
+
+/* 12시(--i:0)부터 시계방향. 6시가 가장 진하고 반시계로 갈수록 흐려짐 */
+.spin-blade:nth-child(1)  { --i: 0;  --o: .37 }
+.spin-blade:nth-child(2)  { --i: 1;  --o: .3 }
+.spin-blade:nth-child(3)  { --i: 2;  --o: .24 }
+.spin-blade:nth-child(4)  { --i: 3;  --o: .19 }
+.spin-blade:nth-child(5)  { --i: 4;  --o: .15 }
+.spin-blade:nth-child(6)  { --i: 5;  --o: .12 }
+.spin-blade:nth-child(7)  { --i: 6;  --o: 1 }
+.spin-blade:nth-child(8)  { --i: 7;  --o: .88 }
+.spin-blade:nth-child(9)  { --i: 8;  --o: .76 }
+.spin-blade:nth-child(10) { --i: 9;  --o: .64 }
+.spin-blade:nth-child(11) { --i: 10; --o: .54 }
+.spin-blade:nth-child(12) { --i: 11; --o: .45 }
+
+/* steps(12) : 30도씩 째깍째깍 */
+@keyframes spinTick {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 가운데 글자 : 회전 컨테이너 바깥이라 같이 돌지 않음 */
+.spin-txt {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--spin-size) * .085);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .02em;
+    color: #8c919b;
+}
+
+
+/* ------------------------------------------------------------
+   안내 문구
+   ------------------------------------------------------------ */
+.coming-msg {
+    margin-top: clamp(34px, 6vh, 80px);
+}
+
+.coming-title {
+    font-size: clamp(24px, 2.6vw, 48px);
+    font-weight: 400;
+    letter-spacing: -.01em;
+    color: var(--cm-txt);
+}
+
+/* '준비중'만 볼드 네이비 */
+.coming-point {
+    font-weight: 700;
+    color: var(--cm-navy);
+}
+
+.coming-sub {
+    margin-top: clamp(10px, 1.4vw, 20px);
+    font-size: clamp(13px, 1vw, 19px);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--cm-sub);
+}
+
+
+/* ------------------------------------------------------------
+   반응형 · 모션 최소화
+   ------------------------------------------------------------ */
+@media (max-width: 640px) {
+    .spin-wrap {
+        --spin-size: clamp(120px, 38vw, 160px);
+    }
+}
+
+/* 320px 초소형 폰 : 서브 문구가 3줄이 되어도 답답하지 않게 */
+@media (max-width: 360px) {
+    .coming {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .coming-sub {
+        line-height: 1.75;
+    }
+}
+
+/* 모션 최소화 : 회전·페이드 없이 정지 상태로 표시 */
+@media (prefers-reduced-motion: reduce) {
+
+    .spin,
+    .spin-wrap,
+    .coming-title,
+    .coming-sub {
+        animation: none;
+    }
+}

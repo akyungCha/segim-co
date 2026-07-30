@@ -1,0 +1,443 @@
+@charset "utf-8";
+
+/* ============================================================
+   [About] 회사소개 배너 + History 타임라인
+   ============================================================ */
+:root {
+    --hist-bg: #fbf7f1;
+    --tl-navy: #182039;
+    --tl-year: #263957;
+    --tl-txt: #5c677d;
+    --tl-red: #e72836;
+}
+
+
+/* ------------------------------------------------------------
+   회사소개 배너 (#intro)
+   ------------------------------------------------------------ */
+.ab-ban {
+    position: relative;
+    width: 100%;
+    height: calc(var(--app-h, 100vh) - var(--gnb-h));
+    height: calc(100dvh - var(--gnb-h));
+    min-height: 420px;
+    overflow: hidden;
+    background: #0b1220 url('../imgs/about.png') no-repeat center center / cover;
+}
+
+/* 스크림 : 좌측·하단으로 갈수록 어둡게 (message 배너와 동일 방식) */
+.ab-ban::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(100deg, rgba(0, 0, 0, .55) 0%, rgba(0, 0, 0, .28) 40%, rgba(0, 0, 0, .04) 74%),
+        linear-gradient(180deg, rgba(0, 0, 0, .28) 0%, rgba(0, 0, 0, 0) 36%, rgba(0, 0, 0, .42) 100%);
+}
+
+/* 라벨은 위, 카피는 아래 (ref3 배치) */
+.ab-ban-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+    padding: clamp(26px, 9vh, 110px) clamp(20px, 4vw, 60px) clamp(50px, 18vh, 215px);
+    /* 줄 리빌 타이밍 (--reveal-* 는 공용 .txt-sheen이 스윕 시작 시점 계산에 사용) */
+    --reveal-dur: 1s;
+    --ab-step: .14s;
+}
+
+.ab-label {
+    font-size: clamp(12px, .95vw, 18px);
+    font-weight: 400;
+    letter-spacing: .12em;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+}
+
+.ab-lead {
+    font-size: clamp(15px, 1.8vw, 34px);
+    font-weight: 400;
+    letter-spacing: -.005em;
+    color: #fff;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, .4);
+}
+
+.ab-title {
+    margin-top: clamp(6px, .8vw, 14px);
+    font-size: clamp(26px, 3.4vw, 66px);
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -.015em;
+    color: #fff;
+    /* 미지원 브라우저 폴백 : 흰색 단색 + 그림자 */
+    text-shadow: 0 4px 22px rgba(0, 0, 0, .4);
+}
+
+.ab-sub {
+    margin-top: clamp(14px, 1.8vw, 34px);
+    font-size: clamp(13px, 1.35vw, 26px);
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, .4);
+}
+
+/* 주황 강조 (Mark. / 세상에 새기는) */
+.ab-point {
+    color: var(--point);
+}
+
+/* h1 안에서는 span으로 줄을 감싸므로 블록 처리 */
+.ab-title .hero-line,
+.ab-title-line {
+    display: block;
+}
+
+/* 순차 스태거 : 라벨 → 리드 → 타이틀 → 서브 */
+.ab-label {
+    --reveal-delay: 0s;
+}
+
+.ab-lead {
+    --reveal-delay: var(--ab-step);
+}
+
+.ab-title-line {
+    --reveal-delay: calc(var(--ab-step) * 2);
+}
+
+.ab-sub {
+    --reveal-delay: calc(var(--ab-step) * 3);
+}
+
+/* 줄 단위 마스크 리빌 (타이틀 줄은 .txt-sheen이 리빌까지 함께 처리) */
+.ab-label,
+.ab-lead,
+.ab-sub {
+    animation: heroLineUp var(--reveal-dur) cubic-bezier(.22, 1, .36, 1) var(--reveal-delay) both;
+}
+
+
+/* ------------------------------------------------------------
+   History 타임라인 (#history)
+   ------------------------------------------------------------ */
+/* 아래 여백은 .tl의 --tl-pad-b가 담당하므로 섹션 하단은 짧게 (푸터와 과하게 벌어지지 않도록) */
+.hist {
+    padding: clamp(56px, 7vw, 120px) 0 clamp(24px, 3vw, 60px);
+    background: var(--hist-bg);
+}
+
+.hist-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+.hist-label {
+    font-size: clamp(14px, 1.05vw, 18px);
+    font-weight: 400;
+    letter-spacing: .01em;
+    color: var(--tl-txt);
+}
+
+/* 타임라인 본체 : 중앙 라인 기준 좌/우 2열 */
+.tl {
+    position: relative;
+    margin-top: clamp(24px, 3vw, 56px);
+    /* 첫 블록 위 · 마지막 블록 아래 여백 : 라인이 콘텐츠보다 길게 뻗는 구간 */
+    --tl-pad-t: clamp(120px, 30vh, 420px);
+    --tl-pad-b: clamp(160px, 40vh, 560px);
+    padding: var(--tl-pad-t) 0 var(--tl-pad-b);
+    /* 라인·노드가 공유하는 중심축 (모바일에서 이 값만 바꾸면 둘 다 따라감) */
+    --tl-axis: 50%;
+    /* 라인 양옆 여백(열 사이 홈통의 절반) · 노드/연도 크기 */
+    --tl-gap: 10%;
+    --tl-line-w: 4px;
+    --tl-node: clamp(16px, 1.6vw, 30px);
+    --tl-year-fs: clamp(24px, 1.8vw, 34px);
+    /* 연도 밑줄 y = 노드가 붙는 높이 */
+    --tl-node-top: calc(var(--tl-year-fs) * 1.2 + 14px);
+}
+
+/* 중앙 세로 라인 : 양 끝이 투명으로 페이드, about.js가 scaleY로 그려줌 */
+.tl-line {
+    position: absolute;
+    /* 축 위에 자기 두께의 절반만큼 당겨 중앙 정렬 */
+    left: var(--tl-axis);
+    top: 0;
+    z-index: 0;
+    width: var(--tl-line-w);
+    height: 100%;
+    margin-left: calc(var(--tl-line-w) / -2);
+    /* 페이드 구간을 위아래 여백 길이에 맞춤 → 콘텐츠에 걸치지 않고 여백에서 사라짐 */
+    background: linear-gradient(to bottom,
+            transparent 0,
+            var(--tl-navy) var(--tl-pad-t),
+            var(--tl-navy) calc(100% - var(--tl-pad-b)),
+            transparent 100%);
+    transform: scaleY(0);
+    transform-origin: top;
+    will-change: transform;
+}
+
+/* ---- 타임라인 전용 리빌 ---- */
+.tl {
+    --tl-ease: cubic-bezier(.16, 1, .3, 1);
+    --tl-dur: 1.15s;
+}
+
+.js .tl-node:not(.tl-node-band),
+.js .tl-col .tl-year,
+.js .tl-col .tl-list li,
+.js .tl-band {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity var(--tl-dur) var(--tl-ease), transform var(--tl-dur) var(--tl-ease);
+    transition-delay: var(--d, 0s);
+}
+
+.js .tl-node.is-in,
+.js .tl-col.is-in .tl-year,
+.js .tl-col.is-in .tl-list li,
+.js .tl-band.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+/* 연도 행 : 좌/우 열 + 라인 위 노드 */
+.tl-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: calc(50% - var(--tl-gap)) calc(50% - var(--tl-gap));
+    justify-content: space-between;
+}
+
+/* 블록 간 세로 간격 : vh 기준이라 화면이 커져도 밀도가 유지됨 */
+.tl-row+.tl-row {
+    margin-top: clamp(88px, 20vh, 300px);
+}
+
+/* 밴드 위아래는 한 단계 더 여유 */
+.tl-row+.tl-band,
+.tl-band+.tl-row {
+    margin-top: clamp(120px, 28vh, 400px);
+}
+
+/* 노드 : 네이비 링 + 크림 채움 */
+.tl-node {
+    position: absolute;
+    /* 라인과 같은 축에 자기 지름의 절반만큼 당겨 정렬  */
+    left: var(--tl-axis);
+    top: var(--tl-node-top);
+    z-index: 1;
+    width: var(--tl-node);
+    height: var(--tl-node);
+    margin: calc(var(--tl-node) / -2) 0 0 calc(var(--tl-node) / -2);
+    border: calc(var(--tl-node) * .22) solid var(--tl-navy);
+    border-radius: 50%;
+    background: var(--hist-bg);
+}
+
+.tl-year {
+    padding-bottom: clamp(8px, .8vw, 14px);
+    border-bottom: 3px solid var(--tl-year);
+    font-size: var(--tl-year-fs);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: var(--tl-year);
+}
+
+/* 2015 : 레드 강조 */
+.tl-year-red {
+    border-bottom-color: var(--tl-red);
+    color: var(--tl-red);
+}
+
+.tl-list {
+    margin-top: clamp(14px, 1.4vw, 26px);
+}
+
+.tl-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px clamp(12px, 1.6vw, 30px);
+    margin-top: 6px;
+    font-size: clamp(13px, .95vw, 17px);
+    line-height: 1.65;
+    color: var(--tl-txt);
+}
+
+.tl-list li:first-child {
+    margin-top: 0;
+}
+
+.tl-date {
+    flex: none;
+}
+
+/* 2017 하이라이트 밴드 : 타임라인을 가로지르는 전체 폭 */
+.tl-band {
+    position: relative;
+    padding: clamp(12px, 1.4vw, 24px) 0;
+    background: linear-gradient(90deg,
+            rgba(255, 175, 21, 1) 0%,
+            rgba(255, 175, 21, .55) 28%,
+            rgba(255, 175, 21, .22) 56%,
+            rgba(255, 175, 21, 0) 88%);
+}
+
+.tl-band-grid {
+    display: grid;
+    grid-template-columns: calc(50% - var(--tl-gap)) calc(50% - var(--tl-gap));
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tl-band-year {
+    text-align: right;
+    font-size: var(--tl-year-fs);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: #ff8d00;
+}
+
+.tl-band-txt {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px clamp(12px, 1.6vw, 30px);
+    font-size: clamp(13px, .95vw, 17px);
+    color: var(--tl-txt);
+}
+
+/* 밴드의 노드는 밴드 중앙에 */
+.tl-node-band {
+    top: 50%;
+}
+
+
+/* ------------------------------------------------------------
+   반응형 : 768px 이하 = 1열 (라인 좌측, 블록은 모두 라인 오른쪽)
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .tl {
+        /* 축만 왼쪽으로 옮기면 라인·노드가 같이 따라옴 */
+        --tl-axis: 12px;
+        /* 위 여백은 비슷하게, 아래 여백은 스크롤이 길어지지 않게 25vh 수준으로 */
+        --tl-pad-t: clamp(100px, 28vh, 320px);
+        --tl-pad-b: clamp(110px, 25vh, 320px);
+        --tl-node: 18px;
+        --tl-year-fs: clamp(21px, 6vw, 28px);
+        --tl-node-top: calc(var(--tl-year-fs) * 1.2 + 10px);
+    }
+
+    .tl-row {
+        grid-template-columns: 1fr;
+        padding-left: calc(var(--tl-axis) + 28px);
+    }
+
+    /* 같은 행의 좌/우 블록이 세로로 쌓임 (같은 연도이므로 행 간격보다 좁게 유지) */
+    .tl-col+.tl-col {
+        margin-top: clamp(30px, 6vh, 60px);
+    }
+
+    /* 연도 밑줄 제거 : 1열에서는 세로 라인과 겹쳐 보임 */
+    .tl-year {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    /* 밑줄이 빠진 만큼 제목-내용 간격 보정 */
+    .tl-list {
+        margin-top: 10px;
+    }
+
+    /* 밴드는 전체 폭 유지 */
+    .tl-band-grid {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding-left: calc(var(--tl-axis) + 28px);
+    }
+
+    .tl-band-year {
+        text-align: left;
+    }
+
+    .tl-node-band {
+        top: 50%;
+    }
+
+    /* 1열이라 스크롤이 길어지므로 데스크톱 간격의 60% 수준만 확대 */
+    .tl-row+.tl-row {
+        margin-top: clamp(46px, 12vh, 160px);
+    }
+
+    .tl-row+.tl-band,
+    .tl-band+.tl-row {
+        margin-top: clamp(60px, 17vh, 210px);
+    }
+}
+
+/* 소형 폰 : 날짜와 내용을 줄바꿈해 가로 넘침 방지 */
+@media (max-width: 480px) {
+    .tl-list li,
+    .tl-band-txt {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .tl-row,
+    .tl-band-grid {
+        padding-left: calc(var(--tl-axis) + 22px);
+    }
+}
+
+@media (max-width: 360px) {
+
+    .ab-ban-inner,
+    .hist-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+/* 짧은 화면(가로 눕힘 등)에서 배너가 과하게 낮아지지 않도록 */
+@media (max-height: 560px) {
+    .ab-ban {
+        height: 420px;
+    }
+}
+
+/* 모션 최소화 : 배너 리빌 없이 즉시 표시 (라인은 about.js가 100%로 고정) */
+@media (prefers-reduced-motion: reduce) {
+
+    .ab-label,
+    .ab-lead,
+    .ab-sub,
+    .ab-title-line {
+        animation: none;
+    }
+
+    .tl-line {
+        transform: scaleY(1);
+    }
+
+    /* 타임라인 항목은 움직임 없이 즉시 표시 */
+    .js .tl-node,
+    .js .tl-col .tl-year,
+    .js .tl-col .tl-list li,
+    .js .tl-band {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

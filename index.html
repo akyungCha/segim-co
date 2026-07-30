@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | 성장의 빛이 되다</title>
+  <meta name="description" content="새김교육(주) 공식 홈페이지 - 성장의 빛이 되다">
+  <link rel="stylesheet" href="/resource/css/index.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+    <main>
+
+      <!-- 히어로 : 한 화면을 가득 채우는 섹션 -->
+      <section class="hero">
+        <div class="hero-copy">
+          <!-- 줄 단위 마스크 : .hero-line이 클립, 안쪽 텍스트가 아래에서 솟아오름 -->
+          <div class="hero-line">
+            <p class="hero-sub">The Light of Growth</p>
+          </div>
+          <div class="hero-line">
+            <h1 class="hero-title txt-sheen">성장의 빛이 되다</h1>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+</body>
+</html>

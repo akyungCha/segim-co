@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | CEO Message</title>
+  <meta name="description" content="새김교육(주) CEO 메시지 - 교육의 본질을 지키며, 미래 교육의 표준을 만듭니다.">
+  <link rel="stylesheet" href="/resource/css/index.css">
+  <link rel="stylesheet" href="/resource/css/message.css">
+  <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
+  <script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+    <main>
+
+      <!-- ========== 배너 ========== -->
+      <section class="ban">
+        <div class="ban-inner">
+          <div class="ban-copy">
+
+            <!-- 줄 단위 마스크 리빌 : index 히어로와 동일한 .hero-line 사용 -->
+            <div class="hero-line">
+              <p class="ban-sub">CEO MESSAGE</p>
+            </div>
+
+            <h1 class="ban-title">
+              <span class="hero-line"><span class="ban-line">교육의 본질을 지키며,</span></span>
+              <!-- 2줄만 스윕 : 자기 리빌이 끝나는 즉시 빛줄기가 지나감 -->
+              <span class="hero-line"><span class="ban-line ban-line-strong txt-sheen">미래 교육의 표준을 만듭니다.</span></span>
+            </h1>
+
+          </div>
+        </div>
+      </section>
+      <!-- // 배너 -->
+
+      <!-- ========== 본문 ========== -->
+      <section class="msg">
+        <div class="msg-inner">
+
+          <!-- Vision : 라벨 + 문장을 한 덩어리로 리빌 -->
+          <div class="msg-block reveal">
+            <p class="msg-label">Vision</p>
+            <p class="msg-vision">
+              파머스는 단순히 영어를<br>
+              가르치는 곳에 머물지 않고<br>
+              <span class="msg-point">미래형 글로벌 인재를 양성</span>합니다.
+            </p>
+          </div>
+
+          <!-- Message : 문단별 스태거 리빌 -->
+          <div class="msg-block msg-block-letter">
+            <p class="msg-label reveal">Message</p>
+
+            <div class="msg-letter">
+              <p class="reveal" style="--d:.06s">안녕하십니까. 새김교육 대표 한선덕입니다.</p>
+
+              <p class="reveal" style="--d:.12s">
+                오늘날 교육 환경은 그 어느 때보다 빠르게 변화하고 있습니다. 하지만 그 변화 속에서도 교육이 지향해야 할 본질은 결코 변하지 않는다고 믿습니다.
+                파머스(PAMUS)는 아이들이 세상과 소통하는 가장 강력한 도구인 '영어'를 통해, 단순히 지식을 습득하는 것을 넘어 미래를 살아가기 위한 핵심 역량을
+                스스로 길러낼 수 있도록 돕고 있습니다.
+              </p>
+
+              <p class="reveal" style="--d:.18s">
+                파머스의 존재 이유는 명확합니다.<br>
+                파머스를 만난 아이들이 영어 실력만큼은 흔들림 없이 똑소리 나게 검증받는 것, 그리고 더 나아가 미래 교육에 필수적인 사고력과 표현력, 논리적인
+                글쓰기 능력, 풍부한 배경지식까지 갖춘 인재로 성장하는 것입니다.<br>
+                학부모님들께는 자녀를 맡긴 선택에 최고의 자부심을, 우리와 함께하는 교육 현장의 동반자들에게는 흔들리지 않는 교육적 성취를 약속드립니다.
+              </p>
+
+              <p class="reveal" style="--d:.24s">
+                파머스는 단순히 영어를 가르치는 곳에 머물지 않겠습니다.<br>
+                아이들에게는 미래를 살아갈 힘을, 학부모님께는 신뢰를, 그리고 대한민국 교육 현장에는 미래형 종합교육기관의 새로운 기준을 제시하며 끊임없이
+                혁신해 나가겠습니다.
+              </p>
+
+              <p class="reveal" style="--d:.3s">
+                교육의 가치를 아는 여러분과 함께, 파머스는 더 큰 미래를 향해 나아가겠습니다. 감사합니다.
+              </p>
+
+              <!-- 사인 : 서한 우측 하단 -->
+              <div class="msg-sign reveal" style="--d:.4s">
+                <img class="msg-sign-img" src="/resource/imgs/sign.png" alt="한선덕 대표 서명">
+                <p class="msg-sign-txt">새김교육 대표 · CEO<br>한  선  덕</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+      <!-- // 본문 -->
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+</body>
+</html>

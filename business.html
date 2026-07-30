@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | Business</title>
+  <meta name="description" content="새김교육(주) 브랜드 소개 - 파머스영어, 파머스 국제어학원, 고래영어, IB 라이팅">
+  <link rel="stylesheet" href="/resource/css/index.css">
+  <link rel="stylesheet" href="/resource/css/business.css">
+  <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
+  <script>document.documentElement.className += ' js';</script>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false"
+        aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link on" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+    <main>
+
+      <!-- ========== Business 배너 ========== -->
+      <section class="bz-ban">
+
+        <!-- 글로우 레이어 : 글로브 펄스 + 랜덤 반짝임 (장식용, 텍스트 아래) -->
+        <div class="bz-glow" aria-hidden="true">
+          <!-- 펄스는 래퍼로 묶음 (아래 광점의 nth-child 순번을 건드리지 않도록) -->
+          <div class="bz-pulses">
+            <span class="bz-pulse"></span>
+            <span class="bz-pulse"></span>
+            <span class="bz-pulse"></span>
+            <span class="bz-pulse"></span>
+            <span class="bz-pulse"></span>
+          </div>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+          <span class="bz-spark"></span>
+        </div>
+
+        <div class="bz-ban-inner">
+
+          <!-- 좌상단 라벨 -->
+          <div class="hero-line">
+            <p class="bz-label">BUSINESS</p>
+          </div>
+
+          <!-- 카피 : 줄 단위 마스크 리빌 (about·message와 동일 방식) -->
+          <div class="bz-copy">
+            <div class="hero-line">
+              <p class="bz-lead">말로 표현하고, 글로 증명하고, 스스로 배우며</p>
+            </div>
+
+            <h1 class="bz-title">
+              <!-- 이 줄만 스윕 : 자기 리빌이 끝나는 즉시 빛줄기가 지나감 -->
+              <span class="hero-line"><span class="bz-title-line txt-sheen">생각이 자라는 새김의 길</span></span>
+            </h1>
+
+            <div class="bz-sub-group">
+              <div class="hero-line">
+                <p class="bz-sub">언어는 외우는 것이 아니라 생각을 나누는 도구입니다.</p>
+              </div>
+              <div class="hero-line">
+                <p class="bz-sub bz-sub-2">새김교육은 아이들이 전 세계를 무대로 자유롭게 뜻을 펼쳐 나갈 미래를 열어갑니다.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- // Business 배너 -->
+
+      <!-- ========== Our Brands ========== -->
+      <section class="brand">
+        <div class="brand-inner">
+
+          <div class="brand-head">
+            <h2 class="brand-title reveal">Our Brands</h2>
+            <p class="brand-sub reveal" style="--d:.08s">생각이 자라는 새김의 길</p>
+          </div>
+
+          <!-- 카드 : 왼쪽부터 0.12초 간격 페이드업 (--d = 공용 .reveal 지연) -->
+          <div class="brand-grid">
+
+            <a class="brand-card reveal" href="https://epamus.com/" style="--d:0s">
+              <span class="brand-logo"><img src="/resource/imgs/logo_pamus.png" alt=""></span>
+              <span class="brand-body">
+                <strong class="brand-name">파머스영어</strong>
+                <span class="brand-desc">모든 학생을 영어의 정상으로 이끄는 약속! </br>Promise Happy-Ending!
+                  초등 영어의 시작부터 중등 영어의 완성까지,</br> 아이의 성장과 함께하는 영어교육으로 미래를 향한 단단한 뿌리를 만듭니다.</span>
+                <span class="brand-more">자세히 보기<span class="brand-arrow">→</span></span>
+              </span>
+            </a>
+
+            <a class="brand-card reveal" href="https://pamus.co.kr/" style="--d:.12s">
+              <span class="brand-logo"><img src="/resource/imgs/logo_inter.png" alt=""></span>
+              <span class="brand-body">
+                <strong class="brand-name">파머스 국제어학원</strong>
+                <span class="brand-desc">스스로 탐구하고 성장하는 자기주도형 인재를 넘어, 세상을 이끄는 글로벌 리더를 </br>양성합니다.
+                  미래를 여는 영어 교육 혁명의 시작, 파머스국제어학원.</span>
+                <span class="brand-more">자세히 보기<span class="brand-arrow">→</span></span>
+              </span>
+            </a>
+
+            <a class="brand-card reveal" href="https://englishwhale.com/" style="--d:.24s">
+              <span class="brand-logo"><img src="/resource/imgs/logo_whale.png" alt=""></span>
+              <span class="brand-body">
+                <strong class="brand-name">고래영어</strong>
+                <span class="brand-desc">고래영어는 스피킹과 라이팅을 중심으로 생각을 영어로 표현하는 힘을 키우는<br class="pc-br">초·중등 영어교육 브랜드입니다.
+                  체계적인 문장 훈련을 통해 아이들이 자신의 생각을 말하고 글로 표현하도록 돕습니다.</span>
+                <span class="brand-more">자세히 보기<span class="brand-arrow">→</span></span>
+              </span>
+            </a>
+
+            <a class="brand-card reveal" href="https://ibwriting.com/" style="--d:.36s">
+              <span class="brand-logo"><img src="/resource/imgs/logo_ib.png" alt=""></span>
+              <span class="brand-body">
+                <strong class="brand-name">IB 라이팅</strong>
+                <span class="brand-desc">IB 라이팅은 글쓰기를 넘어 사고력과 탐구력을 키우는
+                  AI 기반 Writing 플랫폼입니다.
+                  질문하고 탐구하며 생각을 논리적으로 표현하는 힘을 키웁니다.</span>
+                <span class="brand-more">자세히 보기<span class="brand-arrow">→</span></span>
+              </span>
+            </a>
+
+          </div>
+
+        </div>
+      </section>
+      <!-- // Our Brands -->
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+  <script src="/resource/js/business.js"></script>
+</body>
+
+</html>

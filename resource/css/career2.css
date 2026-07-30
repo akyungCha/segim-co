@@ -1,0 +1,457 @@
+@charset "utf-8";
+
+/* ============================================================
+   [Careers] 채용 안내 — 조직 문화 / 복리후생 / 채용절차
+   ============================================================ */
+:root {
+    --rc-bg: #faf8f3;
+    --rc-navy: #22355c;
+    --rc-desc: #8a9099;
+    --rc-label: #9aa0a8;
+}
+
+.rc {
+    background: var(--rc-bg);
+}
+
+.rc-sec {
+    padding: clamp(60px, 9vh, 130px) 0;
+}
+
+/* 첫 섹션은 서브 탭 바로 아래라 위 여백을 조금 더 */
+.rc-culture {
+    padding-top: clamp(70px, 11vh, 160px);
+}
+
+.rc-step {
+    padding-bottom: clamp(80px, 12vh, 190px);
+}
+
+.rc-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+}
+
+
+/* ------------------------------------------------------------
+   섹션 공통 헤더
+   ------------------------------------------------------------ */
+.rc-head {
+    text-align: center;
+}
+
+.rc-label {
+    font-size: clamp(14px, .9vw, 17px);
+    font-weight: 700;
+    color: var(--rc-label);
+}
+
+.rc-title {
+    margin-top: clamp(10px, 1.4vw, 22px);
+    font-size: clamp(22px, 2.2vw, 40px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--rc-navy);
+}
+
+.rc-point {
+    color: var(--point);
+}
+
+.rc-sub {
+    margin-top: clamp(8px, 1vw, 16px);
+    font-size: clamp(12px, .95vw, 16px);
+    line-height: 1.7;
+    color: var(--rc-desc);
+}
+
+
+/* ------------------------------------------------------------
+   섹션 1 : 조직 문화 카드
+   ------------------------------------------------------------ */
+.cu-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 34px);
+    margin-top: clamp(36px, 5vw, 80px);
+}
+
+.cu-card {
+    padding: clamp(20px, 2vw, 34px) clamp(18px, 2vw, 30px) clamp(26px, 3vw, 46px);
+    background: #fff;
+    border-radius: clamp(10px, 1vw, 16px);
+    box-shadow: 0 6px 24px rgba(34, 53, 92, .07);
+    text-align: center;
+}
+
+/* 번호만 좌측 상단 */
+.cu-no {
+    font-size: clamp(12px, .95vw, 16px);
+    color: #263957;
+    text-align: left;
+}
+
+.cu-label {
+    margin-top: clamp(10px, 2.4vw, 20px);
+    font-size: clamp(12px, .9vw, 15px);
+    color: var(--rc-label);
+}
+
+.cu-name {
+    margin-top: clamp(4px, .5vw, 8px);
+    font-size: clamp(20px, 1.5vw, 29px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--rc-navy);
+}
+
+.cu-desc {
+    margin-top: clamp(14px, 1.4vw, 20px);
+    font-size: clamp(11px, .8vw, 13px);
+    line-height: 1.45;
+    color: var(--rc-desc);
+}
+
+/* 등장 : 이동 없이 투명도만, 왼쪽부터 순차 */
+.js .cu-card {
+    opacity: 0;
+    transition: opacity .8s ease-out;
+}
+
+.js .cu-cards.is-in .cu-card {
+    opacity: 1;
+}
+
+.js .cu-cards.is-in .cu-card:nth-child(2) {
+    transition-delay: .28s;
+}
+
+.js .cu-cards.is-in .cu-card:nth-child(3) {
+    transition-delay: .56s;
+}
+
+
+/* ------------------------------------------------------------
+   섹션 2 : 복리후생 카드
+   ------------------------------------------------------------ */
+.wf-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 1.6vw, 28px);
+    margin-top: clamp(36px, 5vw, 80px);
+}
+
+/* 정사각에 가까운 비율 (ref6) — 내용은 세로 가운데 정렬 */
+.wf-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1.2;
+    padding: clamp(16px, 1.8vw, 32px);
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: clamp(10px, 1vw, 16px);
+    text-align: center;
+}
+
+/* 아이콘 : 연한 주황 원 */
+.wf-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(66px, 6.2vw, 116px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #fdf1e2;
+}
+
+.wf-icon img {
+    width: 58%;
+    height: auto;
+}
+
+.wf-name {
+    margin-top: clamp(12px, 1.4vw, 24px);
+    font-size: clamp(14px, 1.1vw, 20px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #000000;
+}
+
+.wf-desc {
+    margin-top: clamp(6px, .8vw, 12px);
+    font-size: clamp(15px, .8vw, 18px);
+    line-height: 1.5;
+   color: #000000;
+}
+
+/* 줄 단위 리빌 : 각 카드가 화면에 들어올 때 뜨고, 같은 줄은 살짝만 시차 */
+.wf-card:nth-child(3n+1) { --d: 0s }
+.wf-card:nth-child(3n+2) { --d: .08s }
+.wf-card:nth-child(3n+3) { --d: .16s }
+
+
+/* ------------------------------------------------------------
+   섹션 3 : 채용절차
+   ------------------------------------------------------------ */
+.st-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.4vw, 24px);
+    margin-top: clamp(46px, 7vw, 110px);
+    --st-size: clamp(92px, 9.5vw, 172px);
+}
+
+.st-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: var(--st-size);
+    aspect-ratio: 1;
+    /* 채움이 원 밖으로 넘치지 않게 */
+    overflow: hidden;
+    border: 1px solid var(--rc-navy);
+    border-radius: 50%;
+}
+
+.st-step {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(10px, .85vw, 15px);
+    color: var(--rc-navy);
+    transition: color .5s ease-out;
+}
+
+.st-name {
+    position: relative;
+    z-index: 1;
+    margin-top: 2px;
+    font-size: clamp(13px, 1.1vw, 20px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--rc-navy);
+    transition: color .5s ease-out;
+}
+
+/* 점선 화살표 */
+
+.st-arrow {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: clamp(30px, 4vw, 76px);
+    height: var(--ar-w);
+    background: repeating-linear-gradient(to right,
+            var(--ar-color) 0 var(--ar-dash),
+            transparent var(--ar-dash) calc(var(--ar-dash) * 2));
+    --ar-color: var(--rc-navy);
+    --ar-w: 2px;
+    --ar-dash: 4px;
+    --ar-dot: 7px;
+    --ar-head: 8px;
+}
+
+.st-arrow::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: var(--ar-dot);
+    height: var(--ar-dot);
+    margin: calc(var(--ar-dot) / -2) 0 0;
+    border-radius: 50%;
+    background: var(--ar-color);
+}
+
+.st-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    margin: -4px 0 0;
+    border-left: var(--ar-head) solid var(--ar-color);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+
+.st-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--point);
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+/* ---- 등장 : 왼쪽부터 하나씩 ---- */
+.js .st-flow>* {
+    opacity: 0;
+    transition: opacity .6s ease-out;
+}
+
+.js .st-flow.is-in>* {
+    opacity: 1;
+}
+
+.js .st-flow.is-in>*:nth-child(2) { transition-delay: .25s }
+.js .st-flow.is-in>*:nth-child(3) { transition-delay: .5s }
+.js .st-flow.is-in>*:nth-child(4) { transition-delay: .75s }
+.js .st-flow.is-in>*:nth-child(5) { transition-delay: 1s }
+
+/* 원이 다 뜬 뒤 주황이 차오르고, 그에 맞춰 글자가 흰색으로 */
+.js .st-flow.is-in .st-fill {
+    transform: scaleY(1);
+    transition: transform .7s ease-out 1.25s;
+}
+
+.js .st-flow.is-in .st-final .st-name {
+    color: #fff;
+    transition-delay: 1.55s;
+}
+
+
+/* 유의사항 */
+.st-note {
+    margin-top: clamp(50px, 8vw, 120px);
+    padding-top: clamp(14px, 1.6vw, 26px);
+    border-top: 1px solid var(--line);
+}
+
+.st-note-title {
+    font-size: clamp(16px, 1.05vw, 20px);
+    font-weight: 700;
+    color: var(--rc-navy);
+}
+
+.st-note-list {
+    margin-top: clamp(10px, 1.2vw, 18px);
+}
+
+.st-note-list li {
+    position: relative;
+    padding-left: 12px;
+    font-size: clamp(11px, .85vw, 14px);
+    line-height: 1.9;
+    color: var(--rc-desc);
+}
+
+.st-note-list li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   반응형
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+
+    /* 컬처 카드 : 세로 스택 */
+    .cu-cards {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* 복지 카드 : 2열 → 줄 단위 시차도 2개 기준으로 */
+    .wf-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 2열은 카드가 좁아 고정 비율에 글자가 넘치므로 높이는 내용에 맡김 */
+    .wf-card {
+        aspect-ratio: auto;
+        min-height: 0;
+    }
+
+    .wf-card:nth-child(3n+1),
+    .wf-card:nth-child(3n+2),
+    .wf-card:nth-child(3n+3) {
+        --d: 0s;
+    }
+
+    .wf-card:nth-child(2n) {
+        --d: .08s;
+    }
+
+    /* 스텝 : 세로로 쌓고 화살표도 아래 방향 */
+    .st-flow {
+        flex-direction: column;
+        gap: 0;
+        --st-size: clamp(110px, 34vw, 150px);
+    }
+
+    /* 세로 배치 : 도트가 위, 화살촉이 아래 */
+    .st-arrow {
+        width: var(--ar-w);
+        max-width: none;
+        height: clamp(30px, 7vw, 46px);
+        background: repeating-linear-gradient(to bottom,
+                var(--ar-color) 0 var(--ar-dash),
+                transparent var(--ar-dash) calc(var(--ar-dash) * 2));
+    }
+
+    .st-arrow::before {
+        left: 50%;
+        top: 0;
+        margin: 0 0 0 calc(var(--ar-dot) / -2);
+    }
+
+    .st-arrow::after {
+        right: auto;
+        top: auto;
+        left: 50%;
+        bottom: 0;
+        margin: 0 0 0 -4px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: var(--ar-head) solid var(--ar-color);
+        border-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .wf-card {
+        padding: clamp(18px, 5vw, 26px) clamp(10px, 3vw, 18px);
+    }
+
+    .wf-desc {
+        font-size: clamp(10.5px, 2.9vw, 12px);
+        line-height: 1.65;
+    }
+
+    .cu-desc {
+        font-size: clamp(11.5px, 3.2vw, 13px);
+    }
+}
+
+
+/* 모션 최소화 : 모든 등장 효과 없이 즉시 표시 */
+@media (prefers-reduced-motion: reduce) {
+
+    .js .cu-card,
+    .js .st-flow>* {
+        opacity: 1;
+        transition: none;
+    }
+
+    .js .st-flow .st-fill {
+        transform: scaleY(1);
+        transition: none;
+    }
+
+    .js .st-flow .st-final .st-name {
+        color: #fff;
+    }
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | 인재상</title>
+  <meta name="description" content="새김교육(주) 인재상 - 우리는 미래를 새기는 사람들입니다.">
+  <link rel="stylesheet" href="/resource/css/index.css">
+  <link rel="stylesheet" href="/resource/css/career.css">
+  <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
+  <script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link on" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+
+    <!-- ========== Careers 서브 탭 ========== -->
+    <nav class="ca-tab" aria-label="Careers 하위메뉴">
+      <div class="ca-tab-inner">
+        <a class="ca-tab-link on" href="/career" aria-current="page">인재상</a>
+        <a class="ca-tab-link" href="/career2">채용 안내</a>
+        <a class="ca-tab-link" href="/career3">채용공고</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- 페이드 스루 무대 : 화면을 고정해 둔 채 색으로 물들였다가 다음 장면이 떠오름
+           (씬 1·2가 같은 고정 화면 안에 겹쳐 있어 이동감이 없음) -->
+      <div class="ca-stage" id="caStage">
+        <div class="ca-viewport">
+
+          <!-- ========== 씬 1 : 메인 배너 ========== -->
+          <section class="ca-scene ca-scene-1 ca-ban">
+            <div class="ca-ban-inner">
+
+              <div class="hero-line">
+                <p class="ca-lead">Beyond English, Future Literacy</p>
+              </div>
+
+              <h1 class="ca-title">
+                <span class="hero-line"><span class="ca-title-line">모두의 성장을 꿈꾸다</span></span>
+                <span class="hero-line"><span class="ca-title-line ca-title-2">성공의 방정식을 새기다</span></span>
+              </h1>
+
+              <div class="hero-line">
+                <p class="ca-sub">그 가능성이 교육의 새로운 길이 됩니다.</p>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- 씬 1을 덮어 물들이는 색 : 씬 2의 배경색 -->
+          <span class="ca-veil ca-veil-1" aria-hidden="true"></span>
+
+          <!-- ========== 씬 2 : 선언 문구 ========== -->
+          <section class="ca-scene ca-scene-2 ca-decl">
+            <!-- 버블 : 하단에 원본 그대로 깔고 장면이 자리잡은 뒤 페이드인 -->
+            <div class="ca-bubbles" aria-hidden="true"></div>
+            <p class="ca-decl-txt">우리는 <span class="ca-decl-point">미래를 새기는 사람</span>들입니다.</p>
+          </section>
+
+          <!-- 씬 2를 덮어 물들이는 색 : 섹션 3의 크림색 -->
+          <span class="ca-veil ca-veil-2" aria-hidden="true"></span>
+
+        </div>
+      </div>
+
+      <!-- ========== 섹션 3 : 인재상 + 레이더 차트 (크림 위에서 이어짐) ========== -->
+      <section class="ca-talent">
+          <div class="ca-radar" id="caRadar">
+
+            <!-- 상단 : Value Seeker (reveal·--d는 모바일 카드 스태거용) -->
+            <div class="ca-item ca-item-value reveal" style="--d:0s">
+              <img class="ca-item-icon" src="/resource/imgs/career/value.png" alt="">
+              <div class="ca-item-txt">
+                <p class="ca-item-label">Value Seeker</p>
+                <p class="ca-item-name">가치를 새기는 사람</p>
+                <p class="ca-item-desc">끊임없는 질문을 통해 교육의 본질적 가치를 탐구하며, 더 나은 미래 교육의 방향을 찾아가는 사람</p>
+              </div>
+            </div>
+
+            <!-- 차트 : 그리드 → 삼각형 → 꼭짓점 순서로 등장 -->
+            <div class="ca-chart">
+              <!-- viewBox를 바깥 원에 딱 맞춤 : 빈 여백이 없어야 꼭짓점과 텍스트가 붙음 -->
+              <svg viewBox="40 40 320 320" role="img" aria-label="인재상 레이더 차트">
+                <g class="rc-grid">
+                  <circle cx="200" cy="200" r="32"></circle>
+                  <circle cx="200" cy="200" r="64"></circle>
+                  <circle cx="200" cy="200" r="96"></circle>
+                  <circle cx="200" cy="200" r="128"></circle>
+                  <circle cx="200" cy="200" r="160"></circle>
+                  <!-- 중심 → 세 꼭짓점 축선 -->
+                  <line x1="200" y1="200" x2="200" y2="40"></line>
+                  <line x1="200" y1="200" x2="338.6" y2="280"></line>
+                  <line x1="200" y1="200" x2="61.4" y2="280"></line>
+                </g>
+                <polygon class="rc-area" points="200,40 338.6,280 61.4,280"></polygon>
+                <circle class="rc-dot rc-dot-1" cx="200" cy="40" r="7"></circle>
+                <circle class="rc-dot rc-dot-2" cx="61.4" cy="280" r="7"></circle>
+                <circle class="rc-dot rc-dot-3" cx="338.6" cy="280" r="7"></circle>
+              </svg>
+            </div>
+
+            <!-- 좌하 : Trust Builder -->
+            <div class="ca-item ca-item-trust reveal" style="--d:.14s">
+              <img class="ca-item-icon" src="/resource/imgs/career/trust.png" alt="">
+              <div class="ca-item-txt">
+                <p class="ca-item-label">Trust Builder</p>
+                <p class="ca-item-name">신뢰를 새기는 사람</p>
+                <p class="ca-item-desc">존중과 공감을 바탕으로 유연하게 소통하며, 함께할수록 더 단단한 신뢰를 세워가는 사람</p>
+              </div>
+            </div>
+
+            <!-- 우하 : Future Maker -->
+            <div class="ca-item ca-item-future reveal" style="--d:.28s">
+              <img class="ca-item-icon" src="/resource/imgs/career/future.png" alt="">
+              <div class="ca-item-txt">
+                <p class="ca-item-label">Future Maker</p>
+                <p class="ca-item-name">내일을 새겨가는 사람</p>
+                <p class="ca-item-desc">변화를 두려워하지 않고 과감히 도전하며, 성장의 가능성을 내일의 현실로 만들어가는 사람</p>
+              </div>
+            </div>
+
+          </div>
+      </section>
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+  <script src="/resource/js/career.js"></script>
+</body>
+</html>

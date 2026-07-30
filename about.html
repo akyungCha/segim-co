@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>새김교육(주) | About</title>
+  <meta name="description" content="새김교육(주) 회사소개 및 연혁 - 생각이 영어가 되는 곳">
+  <link rel="stylesheet" href="/resource/css/index.css">
+  <link rel="stylesheet" href="/resource/css/about.css">
+  <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
+  <script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+  <!-- ============================================================
+       공통 GNB ( 공용)
+       ============================================================ -->
+  <header class="gnb" id="gnb">
+    <div class="gnb-inner">
+
+      <!-- 로고 -->
+      <a class="gnb-logo" href="/">
+        <img src="/resource/imgs/logo.png" alt="새김교육">
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+        <span class="menu-btn-bar"></span>
+      </button>
+
+      <!-- 메뉴 (PC: 가운데 정렬 / 모바일: 슬라이드 패널) -->
+      <nav class="gnb-menu" id="gnbMenu" aria-label="주메뉴">
+        <ul class="menu-list">
+
+          <li class="menu-item has-sub">
+            <a class="menu-link on" href="/about">About</a>
+            <!-- 모바일 아코디언 전용 버튼 (PC에서는 숨김) -->
+            <button type="button" class="sub-btn" aria-label="About 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/about#intro">회사소개</a></li>
+              <li><a href="/about#history">연혁</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/business">Business</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/partnership">Partnership</a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="/newsroom">Newsroom</a>
+          </li>
+
+          <li class="menu-item has-sub">
+            <a class="menu-link" href="/career">Careers</a>
+            <button type="button" class="sub-btn" aria-label="Careers 하위메뉴 열기" aria-expanded="false"></button>
+            <ul class="sub-list">
+              <li><a href="/career">인재상</a></li>
+              <li><a href="/career2">채용 안내</a></li>
+              <li><a href="/career3">채용공고</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <!-- // 공통 GNB -->
+
+  <!-- 모바일 메뉴 열렸을 때 뒤 배경 딤 -->
+  <div class="menu-dim" id="menuDim"></div>
+
+  <!-- 본문 영역 -->
+  <div class="page" id="page">
+    <main>
+
+      <!-- ========== 회사소개 배너 ========== -->
+      <section class="ab-ban" id="intro">
+        <div class="ab-ban-inner">
+
+          <!-- 좌상단 라벨 -->
+          <div class="hero-line ab-label-line">
+            <p class="ab-label">ABOUT</p>
+          </div>
+
+          <!-- 카피 : 줄 단위 마스크 리빌 (index·message와 동일 방식) -->
+          <div class="ab-copy">
+            <div class="hero-line">
+              <p class="ab-lead">Think. Make Your <span class="ab-point">Mark.</span></p>
+            </div>
+
+            <h1 class="ab-title">
+              <!-- 이 줄만 스윕 : 자기 리빌이 끝나는 즉시 빛줄기가 지나감 -->
+              <span class="hero-line"><span class="ab-title-line txt-sheen">생각이 영어가 되는 곳</span></span>
+            </h1>
+
+            <div class="hero-line">
+              <p class="ab-sub">암기하는 영어에서, 생각을 <span class="ab-point">세상에 새기는</span> 영어로</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- // 회사소개 배너 -->
+
+      <!-- ========== History 타임라인 ========== -->
+      <section class="hist" id="history">
+        <div class="hist-inner">
+
+          <p class="hist-label reveal">History</p>
+
+          <div class="tl" id="tl">
+            <!-- 중앙 세로 라인 : 스크롤 진행률에 따라 scaleY로 그려짐 -->
+            <span class="tl-line" id="tlLine"></span>
+
+            <!-- 2008 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2008</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2008.00.00</span><span class="tl-txt">파머스영어(PAMUS ENGLISH) 설립</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2015 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year tl-year-red">2015</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2015.00.00</span><span class="tl-txt">아시아테솔협회 공식 후원사 선정</span></li>
+                  <li><span class="tl-date">2015.00.00</span><span class="tl-txt">'말이 되는 영어' 새김티처 개발</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2017 하이라이트 밴드 : 타임라인을 가로지름 -->
+            <div class="tl-band reveal-tl">
+              <div class="tl-band-grid">
+                <p class="tl-band-year">2017</p>
+                <p class="tl-band-txt">
+                  <span class="tl-date">2017.10.20</span><span class="tl-txt">새김교육(주) 설립</span>
+                </p>
+              </div>
+              <span class="tl-node tl-node-band"></span>
+            </div>
+
+            <!-- 2017 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2017</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2017.10.20</span><span class="tl-txt">파머스영어 전국 런칭</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2017</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2017.00.00</span><span class="tl-txt">고래영어AI스피킹 앱 개발 착수</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2018 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2018</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2018.00.00</span><span class="tl-txt">미시간대·하와이주립대 국제공인 기관 선정</span></li>
+                  <li><span class="tl-date">2018.00.00</span><span class="tl-txt">전국400개 브랜치 개원</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2018</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2018.00.00</span><span class="tl-txt">교육특허 획득</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2019 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2019</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2019.00.00</span><span class="tl-txt">영어교육 특허 취득</span></li>
+                  <li><span class="tl-date">2019.00.00</span><span class="tl-txt">베트남 하노이 국제학교 오픈</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2019</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2019.00.00</span><span class="tl-txt">고래영어 브랜치 런칭</span></li>
+                  <li><span class="tl-date">2019.00.00</span><span class="tl-txt">영어도서관 Library 3000 출시</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2020 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2020</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2020.00.00</span><span class="tl-txt">중국 청도 국제캠퍼스 오픈</span></li>
+                  <li><span class="tl-date">2020.00.00</span><span class="tl-txt">새김티처 2.0 출시</span></li>
+                  <li><span class="tl-date">2020.00.00</span><span class="tl-txt">전국 700개 가맹</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2020</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2020.00.00</span><span class="tl-txt">웨일튜터 1.0 출시</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2021 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2021</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2021.00.00</span><span class="tl-txt">스텔라 시리즈 출간</span></li>
+                  <li><span class="tl-date">2021.00.00</span><span class="tl-txt">새김스튜던트 서비스 개시</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2021</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2021.00.00</span><span class="tl-txt">웨일스튜던트 서비스 개시</span></li>
+                  <li><span class="tl-date">2021.00.00</span><span class="tl-txt">벤처기업달성</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2022 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2022</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2022.00.00</span><span class="tl-txt">교육벤처 인증</span></li>
+                  <li><span class="tl-date">2022.00.00</span><span class="tl-txt">ISO 국제품질인증</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2022</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2022.00.00</span><span class="tl-txt">웨일튜터 3.0 출시</span></li>
+                  <li><span class="tl-date">2022.00.00</span><span class="tl-txt">ISO 국제품질기준 인증</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2023</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2023.00.00</span><span class="tl-txt">국가산업대상 영어교육 대상 수상</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2024</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2024.00.00</span><span class="tl-txt">국가산업대상 영어교육 대상 2연속 수상</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2024</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2024.00.00</span><span class="tl-txt">P.T 교재 4종 출간</span></li>
+                  <li><span class="tl-date">2024.00.00</span><span class="tl-txt">Smart T.G 출시</span></li>
+                  <li><span class="tl-date">2024.00.00</span><span class="tl-txt">Sentence Bank Competition 출간</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2025</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2025.00.00</span><span class="tl-txt">국가산업대상 영어교육 대상 3연속 수상</span></li>
+                </ul>
+              </div>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2025</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2025.00.00</span><span class="tl-txt">웨일티처 1.0 출시</span></li>
+                  <li><span class="tl-date">2025.00.00</span><span class="tl-txt">ERLT 출간 및 출시</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2026 -->
+            <div class="tl-row">
+              <span class="tl-node reveal-tl"></span>
+              <div class="tl-col reveal-tl">
+                <p class="tl-year">2026</p>
+                <ul class="tl-list">
+                  <li><span class="tl-date">2026.00.00</span><span class="tl-txt">국가산업대상 영어교육 대상 4연속 수상</span></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+      <!-- // History 타임라인 -->
+
+    </main>
+  </div>
+  <!-- // 본문 영역 -->
+
+  <!-- ============================================================
+       공통 푸터 (모든 페이지 공용)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- 약관 링크 -->
+      <ul class="footer-link">
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보취급방침</a></li>
+      </ul>
+
+      <!-- 사업자 정보 -->
+      <div class="footer-info">
+        <p>
+          <span>새김교육(주)</span>
+          <span>대표 : 한선덕</span>
+        </p>
+        <p>
+          <span>사업자등록번호 : 809-81-00876</span>
+          <span>통신판매업신고 : 2024-화성동탄-4842호</span>
+        </p>
+        <p>
+          <span>주소 : 경기 화성시 동탄순환대로 823 에이팩시티 1105호</span>
+          <span>E-mail : segimedu@naver.com</span>
+          <span>개인정보관리책임자 : 차아경</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- // 공통 푸터 -->
+
+  <script src="/resource/js/common.js"></script>
+  <script src="/resource/js/about.js"></script>
+</body>
+</html>
