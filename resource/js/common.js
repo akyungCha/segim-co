@@ -130,7 +130,9 @@
   })();
 
   // 진입 시 · 폭이 바뀔 때 상시 노출 상태 반영
+  // (여기서부터는 CSS 초기 펼침 대신 is-open이 상태를 담당)
   openPinned();
+  body.classList.add('sub-ready');
   window.addEventListener('resize', openPinned);
 
 

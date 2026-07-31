@@ -254,6 +254,23 @@ body.menu-open {
     transform: none;
 }
 
+/* 상시 노출 페이지는 첫 렌더부터 펼친 상태로 그림 (로드 직후 내려오는 모션 방지).
+   JS가 준비되면 .sub-ready가 붙어 이 규칙이 빠지고 is-open이 이어받음 — 값이 같아 트랜지션 없음 */
+@media (min-width: 1025px) {
+
+    .has-subbar:not(.sub-ready) .gnb::after {
+        height: var(--subbar-h);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .has-subbar:not(.sub-ready) .menu-link.on~.sub-list {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+}
+
 .sub-list a {
     position: relative;
     display: block;
