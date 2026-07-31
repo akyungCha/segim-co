@@ -255,6 +255,7 @@ body.menu-open {
 }
 
 .sub-list a {
+    position: relative;
     display: block;
     font-size: clamp(14px, 1vw, 16px);
     color: var(--navy);
@@ -264,6 +265,21 @@ body.menu-open {
 
 .sub-list a:hover {
     color: var(--point);
+}
+
+/* 현재 보고 있는 페이지 : 주황 + 밑줄 (common.js가 .on 부여) */
+.sub-list a.on {
+    color: var(--point);
+}
+
+.sub-list a.on::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--point);
 }
 
 /* 모바일 전용 버튼 (PC 숨김) */
@@ -279,6 +295,11 @@ body.menu-open {
 
 .page {
     padding-top: var(--gnb-h);
+}
+
+/* 서브바를 상시 펼쳐 두는 페이지(Careers 등) : 그 높이만큼 본문을 더 내림 */
+.has-subbar .page {
+    padding-top: calc(var(--gnb-h) + var(--subbar-h));
 }
 
 /* 순서 : 배경 이미지 → 오버레이(z-index 1) → 텍스트(z-index 2) */
@@ -448,77 +469,6 @@ body.menu-open {
 
 
 /* ============================================================
-   [Careers 서브 탭] — 인재상 / 채용 안내 / 채용공고 공용
-   ============================================================ */
-.ca-tab {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
-    --ca-tab-h: 52px;
-}
-
-.ca-tab-inner {
-    display: flex;
-    /* 레퍼런스처럼 우측 정렬 */
-    justify-content: flex-end;
-    gap: clamp(24px, 4vw, 76px);
-    width: 100%;
-    max-width: 1400px;
-    height: var(--ca-tab-h);
-    margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 60px);
-}
-
-.ca-tab-link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-size: clamp(13px, 1vw, 16px);
-    color: #6b7280;
-    white-space: nowrap;
-    transition: color .2s ease;
-}
-
-/* 현재 페이지 : 주황 밑줄 */
-.ca-tab-link.on {
-    color: var(--point);
-}
-
-.ca-tab-link.on::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: var(--point);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .ca-tab-link:hover {
-        color: var(--point);
-    }
-}
-
-/* 좁으면 가로 스크롤로 3개 유지 */
-@media (max-width: 640px) {
-    .ca-tab-inner {
-        justify-content: flex-start;
-        gap: 28px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-
-    .ca-tab-inner::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-
-/* ============================================================
    [공통 푸터] — 히어로 아래 일반 문서 흐름 (스크롤하면 노출)
    ============================================================ */
 .footer {
@@ -662,6 +612,11 @@ body.menu-open {
     /* 서브 바는 PC 전용 — 모바일은 아코디언 유지 */
     .gnb::after {
         display: none;
+    }
+
+    /* 서브바가 없으니 본문 오프셋도 헤더 높이만 */
+    .has-subbar .page {
+        padding-top: var(--gnb-h);
     }
 
     .menu-link::after {

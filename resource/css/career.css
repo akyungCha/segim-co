@@ -7,7 +7,6 @@
     --ca-navy: #1f3050;
     --ca-cream: #faf8f3;
     --ca-desc: #8a9099;
-    --ca-tab-h: 52px;
 }
 
 
@@ -521,10 +520,6 @@
 @media (max-width: 360px) {
 
     .ca-ban-inner,
-    .ca-tab-inner {
-        padding-left: 18px;
-        padding-right: 18px;
-    }
 
     .ca-item {
         gap: 10px;

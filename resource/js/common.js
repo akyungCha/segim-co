@@ -52,12 +52,27 @@
     gnb.classList.toggle('sub-open', open && isPC());
   }
 
+  /* 서브바 상시 노출 (body.has-subbar) :
+     Careers처럼 2depth가 페이지 탭 역할을 하는 곳은 호버가 없어도 펼쳐 둠 →
+     호버로 열릴 때와 진입 상태가 같은 바를 쓰게 됨 */
+  var pinned = null;
+  if (body.classList.contains('has-subbar')) {
+    var onLink = document.querySelector('.menu-item.has-sub > .menu-link.on');
+    if (onLink && onLink.parentNode.querySelector('.sub-list')) pinned = onLink.parentNode;
+  }
+
+  // PC에서만 펼침 (모바일로 줄어들면 아코디언이 열린 채 남지 않도록 닫음)
+  function openPinned() {
+    if (pinned) openSub(pinned, isPC());
+    syncBar();
+  }
+
   // 메뉴 사이를 빠르게 오갈 때 깜빡이지 않도록 닫힘만 살짝 지연
   var closeTimer;
 
   function scheduleClose() {
     clearTimeout(closeTimer);
-    closeTimer = setTimeout(function () { closeAllSub(); syncBar(); }, 120);
+    closeTimer = setTimeout(function () { closeAllSub(); openPinned(); }, 120);
   }
 
   function cancelClose() { clearTimeout(closeTimer); }
@@ -104,6 +119,19 @@
     gnb.addEventListener('mouseenter', cancelClose);
     gnb.addEventListener('mouseleave', function () { if (isPC()) scheduleClose(); });
   }
+
+  // 2depth 링크 중 현재 페이지 표시 (예전 페이지 탭바의 주황 밑줄 역할)
+  (function markCurrentSub() {
+    var here = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+    Array.prototype.forEach.call(document.querySelectorAll('.sub-list a'), function (a) {
+      var href = (a.getAttribute('href') || '').split('#')[0].split('/').pop().replace(/\.html$/, '');
+      if (href && href === here) a.classList.add('on');
+    });
+  })();
+
+  // 진입 시 · 폭이 바뀔 때 상시 노출 상태 반영
+  openPinned();
+  window.addEventListener('resize', openPinned);
 
 
   /* ---------- 모바일 전체메뉴 ---------- */
