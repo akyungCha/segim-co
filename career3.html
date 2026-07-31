@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -10,6 +11,7 @@
   <!-- 스크롤 리빌 초기 상태를 첫 렌더부터 적용 (본문 파싱 전에 실행돼야 깜빡임 없음) -->
   <script>document.documentElement.className += ' js';</script>
 </head>
+
 <body>
 
   <!-- ============================================================
@@ -24,7 +26,8 @@
       </a>
 
       <!-- 모바일 햄버거 버튼 -->
-      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false"
+        aria-controls="gnbMenu">
         <span class="menu-btn-bar"></span>
         <span class="menu-btn-bar"></span>
         <span class="menu-btn-bar"></span>
@@ -116,38 +119,54 @@
             <aside class="jb-filter reveal" style="--d:.08s" aria-label="채용공고 필터">
 
               <div class="fl-group is-open">
-                <button type="button" class="fl-head" aria-expanded="true">구분<span class="fl-arrow" aria-hidden="true"></span></button>
+                <button type="button" class="fl-head" aria-expanded="true">구분<span class="fl-arrow"
+                    aria-hidden="true"></span></button>
                 <ul class="fl-list">
-                  <li><label class="fl-item"><input type="checkbox"><span>파머스영어</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>고래영어</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="group"
+                        value="파머스영어"><span>파머스영어</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="group"
+                        value="고래영어"><span>고래영어</span></label></li>
                 </ul>
               </div>
 
               <div class="fl-group is-open">
-                <button type="button" class="fl-head" aria-expanded="true">직무<span class="fl-arrow" aria-hidden="true"></span></button>
+                <button type="button" class="fl-head" aria-expanded="true">직무<span class="fl-arrow"
+                    aria-hidden="true"></span></button>
                 <ul class="fl-list">
-                  <li><label class="fl-item"><input type="checkbox"><span>개발</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>콘텐츠</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>디자인</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>마케팅</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="job" value="개발"><span>개발</span></label>
+                  </li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="job"
+                        value="콘텐츠"><span>콘텐츠</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="job"
+                        value="디자인"><span>디자인</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="job"
+                        value="마케팅"><span>마케팅</span></label></li>
                 </ul>
               </div>
 
               <div class="fl-group is-open">
-                <button type="button" class="fl-head" aria-expanded="true">부서<span class="fl-arrow" aria-hidden="true"></span></button>
+                <button type="button" class="fl-head" aria-expanded="true">부서<span class="fl-arrow"
+                    aria-hidden="true"></span></button>
                 <ul class="fl-list">
-                  <li><label class="fl-item"><input type="checkbox"><span>기업부설연구소</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>사업부</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>경영지원</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>강사</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="dept"
+                        value="기업부설연구소"><span>기업부설연구소</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="dept"
+                        value="사업부"><span>사업부</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="dept"
+                        value="전략운영"><span>전략운영</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="dept"
+                        value="강사"><span>강사</span></label></li>
                 </ul>
               </div>
 
               <div class="fl-group is-open">
-                <button type="button" class="fl-head" aria-expanded="true">고용형태<span class="fl-arrow" aria-hidden="true"></span></button>
+                <button type="button" class="fl-head" aria-expanded="true">고용형태<span class="fl-arrow"
+                    aria-hidden="true"></span></button>
                 <ul class="fl-list">
-                  <li><label class="fl-item"><input type="checkbox"><span>정규</span></label></li>
-                  <li><label class="fl-item"><input type="checkbox"><span>계약</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="employment"
+                        value="정규"><span>정규</span></label></li>
+                  <li><label class="fl-item"><input type="checkbox" data-filter="employment"
+                        value="계약"><span>계약</span></label></li>
                 </ul>
               </div>
 
@@ -159,7 +178,8 @@
               <!-- 있음 -->
               <div class="jb-grid">
 
-                <article class="jb-card reveal">
+                <article class="jb-card reveal" data-group="파머스영어 고래영어" data-job="콘텐츠" data-dept="기업부설연구소"
+                  data-employment="정규">
                   <span class="jb-dept">기업부설연구소</span>
                   <h2 class="jb-job">영어 교육 콘텐츠 기획</h2>
                   <div class="jb-tags">
@@ -172,7 +192,8 @@
                   </div>
                 </article>
 
-                <article class="jb-card reveal" style="--d:.1s">
+                <article class="jb-card reveal" style="--d:.1s" data-group="파머스영어" data-job="마케팅" data-dept="사업부"
+                  data-employment="정규">
                   <span class="jb-dept">사업부</span>
                   <h2 class="jb-job">프랜차이즈 운영 매니저</h2>
                   <div class="jb-tags">
@@ -185,7 +206,9 @@
                   </div>
                 </article>
 
-                <article class="jb-card reveal" style="--d:.2s">
+                <!-- 배지는 '마케팅'이지만 부서 필터 목록 기준으로는 사업부 -->
+                <article class="jb-card reveal" style="--d:.2s" data-group="고래영어" data-job="마케팅" data-dept="사업부"
+                  data-employment="계약">
                   <span class="jb-dept">마케팅</span>
                   <h2 class="jb-job">브랜드 마케팅 담당자</h2>
                   <div class="jb-tags">
@@ -198,9 +221,10 @@
                   </div>
                 </article>
 
-                <article class="jb-card reveal" style="--d:.3s">
-                  <span class="jb-dept">경영지원</span>
-                  <h2 class="jb-job">경영지원 사원</h2>
+                <article class="jb-card reveal" style="--d:.3s" data-group="파머스영어 고래영어" data-job="" data-dept="전략운영"
+                  data-employment="정규">
+                  <span class="jb-dept">전략운영본부</span>
+                  <h2 class="jb-job">전략운영본부 사원</h2>
                   <div class="jb-tags">
                     <span class="jb-tag">신입·경력</span>
                     <span class="jb-tag">정규직</span>
@@ -265,4 +289,5 @@
   <script src="resource/js/common.js"></script>
   <script src="resource/js/career3.js"></script>
 </body>
+
 </html>

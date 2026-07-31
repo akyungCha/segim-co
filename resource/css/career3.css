@@ -337,9 +337,9 @@
 
 /* 호버 : 주황 테두리 + 살짝 떠오름 (ref7 4번째 카드 상태) */
 @media (hover: hover) and (pointer: fine) {
+
     .js .jb-card.is-in:hover,
     .jb-card:hover {
-        transform: translateY(-4px);
         border-color: var(--point);
         box-shadow: 0 10px 26px rgba(240, 138, 30, .16);
     }
@@ -353,6 +353,29 @@
 @media (hover: hover) and (pointer: fine) {
     .js .jb-card.is-in {
         transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+}
+
+
+/* 필터 제외 카드 : 자리까지 비움 */
+.jb-card.is-off {
+    display: none;
+}
+
+/* 필터 통과 카드 : 등장만 살짝 부드럽게 */
+.jb-card.is-on {
+    animation: jbCardIn .28s ease both;
+}
+
+@keyframes jbCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
     }
 }
 
@@ -392,6 +415,11 @@
     display: flex;
 }
 
+/* 필터 결과 0건 : 같은 빈 상태 화면 재사용 */
+.jb-result.is-noresult .jb-empty {
+    display: flex;
+}
+
 /* 없음일 때 필터는 그대로 두되 톤만 살짝 흐리게
    (.js .reveal.is-in 이 opacity:1을 잡고 있어 같은 단계로 맞춤) */
 .js .is-empty .jb-filter,
@@ -422,14 +450,37 @@
     }
 
     .jb-filter {
-        /* 그룹을 2열로 접어 세로 길이를 줄임 */
+        /* 항목을 3열로 깔기 위해 그룹은 1열로 쌓음 */
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 14px 18px;
     }
 
     .fl-group+.fl-group {
         margin-top: 0;
+    }
+
+    /* 항목을 한 줄에 3개씩 */
+    .fl-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px 10px;
+    }
+
+    /* 세로 쌓기용 여백 해제 */
+    .fl-list li+li {
+        margin-top: 0;
+    }
+
+    /* 긴 항목(기업부설연구소) 넘침 방지 */
+    .fl-list li {
+        min-width: 0;
+    }
+
+    .fl-item {
+        gap: 6px;
+        font-size: 12px;
+        word-break: break-all;
     }
 
     .jb-grid {
@@ -497,5 +548,9 @@
     .jb-card,
     .jb-arrow {
         transition: none;
+    }
+
+    .jb-card.is-on {
+        animation: none;
     }
 }

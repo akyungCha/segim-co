@@ -37,6 +37,139 @@
         linear-gradient(180deg, rgba(0, 0, 0, .28) 0%, rgba(0, 0, 0, 0) 36%, rgba(0, 0, 0, .42) 100%);
 }
 
+/* 발광점 레이어 : 배경 이미지 위 · 텍스트 아래 */
+.ab-glints {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 점 하나 : 흰 점 + 따뜻한 halo (위치·크기·속도는 아래 nth-child에서) */
+.ab-glints span {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+        0 0 6px 1px rgba(255, 240, 210, .85),
+        0 0 14px 4px rgba(255, 240, 210, .35);
+    opacity: 0;
+    animation: abGlint 4s ease-in-out infinite;
+}
+
+/* 켜졌다 꺼지는 펄스 (--s 로 점마다 크기 차이) */
+@keyframes abGlint {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(calc(var(--s, 1) * .6));
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(var(--s, 1));
+    }
+}
+
+/* 위치·크기·속도·시작 시점 전부 다르게 (은하수처럼 불규칙하게) */
+.ab-glints span:nth-child(1) { --x: 6.1%; --y: 47.7%; --s: 1.34; animation-duration: 7.0s; animation-delay: 2.9s }
+.ab-glints span:nth-child(2) { --x: 94.2%; --y: 3.1%; --s: 0.97; animation-duration: 4.5s; animation-delay: 0.6s }
+.ab-glints span:nth-child(3) { --x: 29.5%; --y: 66.3%; --s: 1.11; animation-duration: 6.1s; animation-delay: 0.5s }
+.ab-glints span:nth-child(4) { --x: 11.1%; --y: 24.1%; --s: 0.66; animation-duration: 3.9s; animation-delay: 2.8s }
+.ab-glints span:nth-child(5) { --x: 71.5%; --y: 48.4%; --s: 1.32; animation-duration: 5.6s; animation-delay: 3.9s }
+.ab-glints span:nth-child(6) { --x: 71.2%; --y: 34.8%; --s: 0.67; animation-duration: 7.1s; animation-delay: 1.7s }
+.ab-glints span:nth-child(7) { --x: 60.6%; --y: 75.0%; --s: 0.86; animation-duration: 5.1s; animation-delay: 4.9s }
+.ab-glints span:nth-child(8) { --x: 84.1%; --y: 35.8%; --s: 1.14; animation-duration: 4.4s; animation-delay: 4.4s }
+.ab-glints span:nth-child(9) { --x: 85.4%; --y: 91.2%; --s: 0.88; animation-duration: 6.8s; animation-delay: 3.6s }
+.ab-glints span:nth-child(10) { --x: 87.1%; --y: 25.7%; --s: 1.06; animation-duration: 6.0s; animation-delay: 2.2s }
+.ab-glints span:nth-child(11) { --x: 73.0%; --y: 22.5%; --s: 1.04; animation-duration: 6.6s; animation-delay: 3.2s }
+.ab-glints span:nth-child(12) { --x: 21.0%; --y: 72.3%; --s: 0.93; animation-duration: 4.2s; animation-delay: 5.3s }
+.ab-glints span:nth-child(13) { --x: 46.6%; --y: 38.1%; --s: 1.51; animation-duration: 3.5s; animation-delay: 3.9s }
+.ab-glints span:nth-child(14) { --x: 38.7%; --y: 12.0%; --s: 1.47; animation-duration: 7.1s; animation-delay: 0.0s }
+.ab-glints span:nth-child(15) { --x: 65.2%; --y: 63.5%; --s: 0.99; animation-duration: 4.4s; animation-delay: 1.5s }
+.ab-glints span:nth-child(16) { --x: 30.4%; --y: 45.8%; --s: 0.65; animation-duration: 3.4s; animation-delay: 4.8s }
+.ab-glints span:nth-child(17) { --x: 56.9%; --y: 64.0%; --s: 1.19; animation-duration: 6.4s; animation-delay: 1.6s }
+.ab-glints span:nth-child(18) { --x: 88.2%; --y: 61.9%; --s: 1.40; animation-duration: 3.6s; animation-delay: 3.7s }
+.ab-glints span:nth-child(19) { --x: 36.4%; --y: 76.3%; --s: 1.25; animation-duration: 7.0s; animation-delay: 1.5s }
+.ab-glints span:nth-child(20) { --x: 55.7%; --y: 6.6%; --s: 1.25; animation-duration: 6.9s; animation-delay: 4.5s }
+.ab-glints span:nth-child(21) { --x: 22.0%; --y: 86.3%; --s: 0.84; animation-duration: 7.0s; animation-delay: 0.9s }
+.ab-glints span:nth-child(22) { --x: 47.1%; --y: 21.0%; --s: 0.92; animation-duration: 4.0s; animation-delay: 3.4s }
+.ab-glints span:nth-child(23) { --x: 70.2%; --y: 88.4%; --s: 0.86; animation-duration: 3.5s; animation-delay: 4.9s }
+.ab-glints span:nth-child(24) { --x: 28.0%; --y: 8.6%; --s: 1.03; animation-duration: 4.2s; animation-delay: 0.4s }
+.ab-glints span:nth-child(25) { --x: 52.0%; --y: 78.3%; --s: 0.92; animation-duration: 5.2s; animation-delay: 2.0s }
+.ab-glints span:nth-child(26) { --x: 54.7%; --y: 23.8%; --s: 1.45; animation-duration: 4.4s; animation-delay: 1.4s }
+.ab-glints span:nth-child(27) { --x: 88.5%; --y: 12.1%; --s: 1.36; animation-duration: 5.5s; animation-delay: 0.9s }
+.ab-glints span:nth-child(28) { --x: 32.4%; --y: 35.2%; --s: 0.95; animation-duration: 3.5s; animation-delay: 3.6s }
+.ab-glints span:nth-child(29) { --x: 97.8%; --y: 46.7%; --s: 1.48; animation-duration: 5.6s; animation-delay: 2.0s }
+.ab-glints span:nth-child(30) { --x: 11.2%; --y: 75.0%; --s: 1.02; animation-duration: 3.2s; animation-delay: 1.5s }
+.ab-glints span:nth-child(31) { --x: 43.8%; --y: 3.7%; --s: 1.31; animation-duration: 5.6s; animation-delay: 0.4s }
+.ab-glints span:nth-child(32) { --x: 63.0%; --y: 12.0%; --s: 0.83; animation-duration: 3.9s; animation-delay: 2.8s }
+.ab-glints span:nth-child(33) { --x: 96.9%; --y: 84.9%; --s: 1.34; animation-duration: 3.8s; animation-delay: 5.5s }
+.ab-glints span:nth-child(34) { --x: 89.0%; --y: 79.7%; --s: 1.19; animation-duration: 4.8s; animation-delay: 0.9s }
+.ab-glints span:nth-child(35) { --x: 28.9%; --y: 89.9%; --s: 1.45; animation-duration: 6.4s; animation-delay: 4.8s }
+.ab-glints span:nth-child(36) { --x: 95.9%; --y: 60.4%; --s: 1.18; animation-duration: 6.1s; animation-delay: 0.2s }
+.ab-glints span:nth-child(37) { --x: 61.3%; --y: 22.5%; --s: 1.33; animation-duration: 6.2s; animation-delay: 2.7s }
+.ab-glints span:nth-child(38) { --x: 20.8%; --y: 21.2%; --s: 0.80; animation-duration: 5.3s; animation-delay: 3.5s }
+.ab-glints span:nth-child(39) { --x: 46.7%; --y: 70.6%; --s: 1.41; animation-duration: 3.6s; animation-delay: 4.1s }
+.ab-glints span:nth-child(40) { --x: 13.1%; --y: 44.4%; --s: 1.52; animation-duration: 6.8s; animation-delay: 5.0s }
+.ab-glints span:nth-child(41) { --x: 72.4%; --y: 3.2%; --s: 1.38; animation-duration: 6.7s; animation-delay: 4.6s }
+.ab-glints span:nth-child(42) { --x: 97.3%; --y: 18.8%; --s: 1.15; animation-duration: 6.8s; animation-delay: 2.6s }
+.ab-glints span:nth-child(43) { --x: 68.0%; --y: 80.2%; --s: 0.79; animation-duration: 5.3s; animation-delay: 5.3s }
+.ab-glints span:nth-child(44) { --x: 23.5%; --y: 60.8%; --s: 1.19; animation-duration: 4.2s; animation-delay: 4.2s }
+.ab-glints span:nth-child(45) { --x: 71.0%; --y: 63.0%; --s: 1.00; animation-duration: 6.9s; animation-delay: 3.7s }
+.ab-glints span:nth-child(46) { --x: 47.0%; --y: 49.4%; --s: 1.03; animation-duration: 6.6s; animation-delay: 0.3s }
+.ab-glints span:nth-child(47) { --x: 27.1%; --y: 79.0%; --s: 1.32; animation-duration: 4.0s; animation-delay: 5.5s }
+.ab-glints span:nth-child(48) { --x: 40.8%; --y: 25.1%; --s: 1.33; animation-duration: 3.3s; animation-delay: 4.3s }
+.ab-glints span:nth-child(49) { --x: 19.4%; --y: 9.5%; --s: 1.36; animation-duration: 5.5s; animation-delay: 5.8s }
+.ab-glints span:nth-child(50) { --x: 52.5%; --y: 89.9%; --s: 1.37; animation-duration: 5.8s; animation-delay: 4.4s }
+.ab-glints span:nth-child(51) { --x: 79.4%; --y: 10.3%; --s: 0.65; animation-duration: 6.8s; animation-delay: 5.2s }
+.ab-glints span:nth-child(52) { --x: 3.7%; --y: 76.0%; --s: 0.81; animation-duration: 5.0s; animation-delay: 0.2s }
+.ab-glints span:nth-child(53) { --x: 77.9%; --y: 50.6%; --s: 1.11; animation-duration: 5.2s; animation-delay: 5.0s }
+.ab-glints span:nth-child(54) { --x: 81.6%; --y: 23.6%; --s: 1.11; animation-duration: 5.3s; animation-delay: 4.4s }
+.ab-glints span:nth-child(55) { --x: 89.9%; --y: 46.5%; --s: 0.98; animation-duration: 4.6s; animation-delay: 4.1s }
+.ab-glints span:nth-child(56) { --x: 46.3%; --y: 91.1%; --s: 0.92; animation-duration: 6.1s; animation-delay: 2.8s }
+.ab-glints span:nth-child(57) { --x: 39.2%; --y: 53.1%; --s: 1.40; animation-duration: 4.6s; animation-delay: 3.5s }
+.ab-glints span:nth-child(58) { --x: 28.1%; --y: 19.8%; --s: 1.27; animation-duration: 4.2s; animation-delay: 0.8s }
+.ab-glints span:nth-child(59) { --x: 36.4%; --y: 89.9%; --s: 1.11; animation-duration: 6.9s; animation-delay: 2.8s }
+.ab-glints span:nth-child(60) { --x: 96.3%; --y: 33.6%; --s: 1.50; animation-duration: 5.6s; animation-delay: 2.7s }
+.ab-glints span:nth-child(61) { --x: 7.0%; --y: 89.3%; --s: 1.03; animation-duration: 3.9s; animation-delay: 2.0s }
+.ab-glints span:nth-child(62) { --x: 20.0%; --y: 52.3%; --s: 1.20; animation-duration: 6.5s; animation-delay: 5.5s }
+.ab-glints span:nth-child(63) { --x: 18.8%; --y: 36.6%; --s: 1.26; animation-duration: 6.8s; animation-delay: 5.2s }
+.ab-glints span:nth-child(64) { --x: 16.1%; --y: 57.1%; --s: 1.57; animation-duration: 5.8s; animation-delay: 2.3s }
+.ab-glints span:nth-child(65) { --x: 61.2%; --y: 46.0%; --s: 1.24; animation-duration: 4.1s; animation-delay: 0.3s }
+.ab-glints span:nth-child(66) { --x: 51.5%; --y: 51.5%; --s: 1.55; animation-duration: 6.0s; animation-delay: 3.6s }
+.ab-glints span:nth-child(67) { --x: 6.8%; --y: 32.6%; --s: 1.30; animation-duration: 5.2s; animation-delay: 4.8s }
+.ab-glints span:nth-child(68) { --x: 2.6%; --y: 9.2%; --s: 0.87; animation-duration: 5.5s; animation-delay: 3.9s }
+.ab-glints span:nth-child(69) { --x: 97.9%; --y: 73.0%; --s: 1.35; animation-duration: 4.6s; animation-delay: 3.9s }
+.ab-glints span:nth-child(70) { --x: 64.9%; --y: 37.5%; --s: 1.21; animation-duration: 4.1s; animation-delay: 1.5s }
+.ab-glints span:nth-child(71) { --x: 56.9%; --y: 31.5%; --s: 1.28; animation-duration: 5.0s; animation-delay: 1.9s }
+.ab-glints span:nth-child(72) { --x: 44.3%; --y: 62.7%; --s: 1.03; animation-duration: 4.9s; animation-delay: 1.6s }
+.ab-glints span:nth-child(73) { --x: 10.7%; --y: 11.2%; --s: 0.84; animation-duration: 5.5s; animation-delay: 2.6s }
+.ab-glints span:nth-child(74) { --x: 11.8%; --y: 84.7%; --s: 0.73; animation-duration: 6.3s; animation-delay: 1.9s }
+.ab-glints span:nth-child(75) { --x: 78.7%; --y: 33.4%; --s: 1.19; animation-duration: 6.1s; animation-delay: 5.1s }
+.ab-glints span:nth-child(76) { --x: 77.5%; --y: 72.8%; --s: 1.35; animation-duration: 6.8s; animation-delay: 4.6s }
+.ab-glints span:nth-child(77) { --x: 79.2%; --y: 58.5%; --s: 1.57; animation-duration: 5.3s; animation-delay: 2.1s }
+.ab-glints span:nth-child(78) { --x: 2.5%; --y: 62.9%; --s: 1.54; animation-duration: 4.5s; animation-delay: 5.3s }
+.ab-glints span:nth-child(79) { --x: 13.8%; --y: 33.3%; --s: 0.76; animation-duration: 5.0s; animation-delay: 2.5s }
+.ab-glints span:nth-child(80) { --x: 2.0%; --y: 19.0%; --s: 0.73; animation-duration: 3.5s; animation-delay: 4.3s }
+.ab-glints span:nth-child(81) { --x: 38.4%; --y: 57.7%; --s: 1.20; animation-duration: 6.8s; animation-delay: 1.4s }
+.ab-glints span:nth-child(82) { --x: 35.8%; --y: 34.7%; --s: 1.38; animation-duration: 3.6s; animation-delay: 4.5s }
+.ab-glints span:nth-child(83) { --x: 76.7%; --y: 93.1%; --s: 1.43; animation-duration: 6.9s; animation-delay: 3.6s }
+.ab-glints span:nth-child(84) { --x: 61.7%; --y: 85.4%; --s: 0.99; animation-duration: 5.6s; animation-delay: 5.1s }
+
+/* 모션 최소화 : 발광점 숨김 */
+@media (prefers-reduced-motion: reduce) {
+    .ab-glints {
+        display: none;
+    }
+}
+
 /* 라벨은 위, 카피는 아래 (ref3 배치) */
 .ab-ban-inner {
     position: relative;
@@ -72,7 +205,7 @@
 
 .ab-title {
     margin-top: clamp(6px, .8vw, 14px);
-    font-size: clamp(26px, 3.4vw, 66px);
+    font-size: clamp(32px, 3.4vw, 66px);
     font-weight: 800;
     line-height: 1.3;
     letter-spacing: -.015em;
@@ -125,6 +258,9 @@
 }
 
 
+
+
+
 /* ------------------------------------------------------------
    History 타임라인 (#history)
    ------------------------------------------------------------ */
@@ -152,32 +288,25 @@
 .tl {
     position: relative;
     margin-top: clamp(24px, 3vw, 56px);
-    /* 첫 블록 위 · 마지막 블록 아래 여백 : 라인이 콘텐츠보다 길게 뻗는 구간 */
     --tl-pad-t: clamp(120px, 30vh, 420px);
     --tl-pad-b: clamp(160px, 40vh, 560px);
     padding: var(--tl-pad-t) 0 var(--tl-pad-b);
-    /* 라인·노드가 공유하는 중심축 (모바일에서 이 값만 바꾸면 둘 다 따라감) */
     --tl-axis: 50%;
-    /* 라인 양옆 여백(열 사이 홈통의 절반) · 노드/연도 크기 */
     --tl-gap: 10%;
     --tl-line-w: 4px;
     --tl-node: clamp(16px, 1.6vw, 30px);
     --tl-year-fs: clamp(24px, 1.8vw, 34px);
-    /* 연도 밑줄 y = 노드가 붙는 높이 */
     --tl-node-top: calc(var(--tl-year-fs) * 1.2 + 14px);
 }
 
-/* 중앙 세로 라인 : 양 끝이 투명으로 페이드, about.js가 scaleY로 그려줌 */
 .tl-line {
     position: absolute;
-    /* 축 위에 자기 두께의 절반만큼 당겨 중앙 정렬 */
     left: var(--tl-axis);
     top: 0;
     z-index: 0;
     width: var(--tl-line-w);
     height: 100%;
     margin-left: calc(var(--tl-line-w) / -2);
-    /* 페이드 구간을 위아래 여백 길이에 맞춤 → 콘텐츠에 걸치지 않고 여백에서 사라짐 */
     background: linear-gradient(to bottom,
             transparent 0,
             var(--tl-navy) var(--tl-pad-t),
@@ -200,8 +329,13 @@
 .js .tl-band {
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity var(--tl-dur) var(--tl-ease), transform var(--tl-dur) var(--tl-ease);
-    transition-delay: var(--d, 0s);
+    /* 리빌은 --d 만큼 지연, 컬러 하이라이트는 지연 없이 바로 */
+    transition:
+        opacity var(--tl-dur) var(--tl-ease) var(--d, 0s),
+        transform var(--tl-dur) var(--tl-ease) var(--d, 0s),
+        color .4s ease,
+        border-color .4s ease,
+        background .4s ease;
 }
 
 .js .tl-node.is-in,
@@ -319,6 +453,8 @@
     color: var(--tl-txt);
 }
 
+
+
 /* 밴드의 노드는 밴드 중앙에 */
 .tl-node-band {
     top: 50%;
@@ -326,13 +462,54 @@
 
 
 /* ------------------------------------------------------------
-   반응형 : 768px 이하 = 1열 (라인 좌측, 블록은 모두 라인 오른쪽)
+   스크롤 위치 기반 컬러 하이라이트(가운데만)
+   ------------------------------------------------------------ */
+.tl-node-band,
+.tl-band-year {
+    transition: color .4s ease, border-color .4s ease, background .4s ease;
+}
+
+.tl-row.is-active .tl-node,
+.tl-band.is-active .tl-node {
+    background: var(--point);
+}
+
+.tl-row.is-active .tl-col[data-brand="pamus"] .tl-year {
+    border-bottom-color: #e72836;
+    color: #e72836;
+}
+
+.tl-row.is-active .tl-col[data-brand="whale"] .tl-year {
+    border-bottom-color: #003d6a;
+    color: #003d6a;
+}
+
+.tl-band.is-active {
+    background: linear-gradient(90deg,
+            rgba(255, 141, 0, 1) 0%,
+            rgba(255, 175, 21, .75) 30%,
+            rgba(255, 175, 21, .34) 58%,
+            rgba(255, 175, 21, 0) 90%);
+}
+
+.tl-band.is-active .tl-band-year {
+    color: var(--point);
+}
+
+/* 지나감 : 네이비로 다시~ */
+.tl-row.is-passed .tl-year,
+.tl-band.is-passed .tl-band-year {
+    border-bottom-color: var(--tl-year);
+    color: var(--tl-year);
+}
+
+
+/* ------------------------------------------------------------
+   반응형 : 768px 이하
    ------------------------------------------------------------ */
 @media (max-width: 768px) {
     .tl {
-        /* 축만 왼쪽으로 옮기면 라인·노드가 같이 따라옴 */
         --tl-axis: 12px;
-        /* 위 여백은 비슷하게, 아래 여백은 스크롤이 길어지지 않게 25vh 수준으로 */
         --tl-pad-t: clamp(100px, 28vh, 320px);
         --tl-pad-b: clamp(110px, 25vh, 320px);
         --tl-node: 18px;
@@ -345,23 +522,19 @@
         padding-left: calc(var(--tl-axis) + 28px);
     }
 
-    /* 같은 행의 좌/우 블록이 세로로 쌓임 (같은 연도이므로 행 간격보다 좁게 유지) */
     .tl-col+.tl-col {
         margin-top: clamp(30px, 6vh, 60px);
     }
 
-    /* 연도 밑줄 제거 : 1열에서는 세로 라인과 겹쳐 보임 */
     .tl-year {
         padding-bottom: 0;
         border-bottom: 0;
     }
 
-    /* 밑줄이 빠진 만큼 제목-내용 간격 보정 */
     .tl-list {
         margin-top: 10px;
     }
 
-    /* 밴드는 전체 폭 유지 */
     .tl-band-grid {
         grid-template-columns: 1fr;
         gap: 4px;
@@ -376,7 +549,6 @@
         top: 50%;
     }
 
-    /* 1열이라 스크롤이 길어지므로 데스크톱 간격의 60% 수준만 확대 */
     .tl-row+.tl-row {
         margin-top: clamp(46px, 12vh, 160px);
     }
@@ -387,7 +559,6 @@
     }
 }
 
-/* 소형 폰 : 날짜와 내용을 줄바꿈해 가로 넘침 방지 */
 @media (max-width: 480px) {
     .tl-list li,
     .tl-band-txt {

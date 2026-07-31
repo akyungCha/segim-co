@@ -21,13 +21,13 @@
     return true;
   }
 
-  // 경로 비교용 정규화 : 앞 슬래시·.html 제거
-  // (clean URL "/about"과 파일명 "about.html" 둘 다 같은 값으로 취급)
+  // 경로 비교용 정규화 : 마지막 조각만 남기고 .html 제거
+  // 하위 경로 배포(/segim-co/about.html)와 clean URL(/about) 모두 "about"으로 취급
   function normPath(p) {
-    return p.replace(/^\//, '').replace(/\.html$/, '');
+    return p.split('/').pop().replace(/\.html$/, '');
   }
 
-  // 같은 페이지 앵커 링크 가로채기 ("/about#intro" 형태 포함)
+  // 같은 페이지 앵커 링크 가로채기 ("about.html#intro" 형태 포함)
   document.addEventListener('click', function (e) {
     var a = e.target;
     while (a && a.tagName !== 'A') a = a.parentNode;
@@ -97,6 +97,41 @@
   }
 
 
+  /* ---------- 스크롤 위치 기반 컬러 하이라이트 ----------
+     노드가 화면 세로 중앙 ±BAND 안 = 활성, 중앙선을 지나가면 = 지나감 */
+  function initTimelineHighlight(tl) {
+    var rows = tl.querySelectorAll('.tl-row, .tl-band');
+    if (!rows.length) return;
+
+    var BAND = 120;   // 중앙 기준 활성 범위(px)
+    var raf = 0;
+
+    function update() {
+      raf = 0;
+      var mid = (window.innerHeight || document.documentElement.clientHeight) / 2;
+
+      for (var i = 0; i < rows.length; i++) {
+        var node = rows[i].querySelector('.tl-node');
+        if (!node) continue;
+        var r = node.getBoundingClientRect();
+        var c = r.top + r.height / 2;
+        var active = Math.abs(c - mid) <= BAND;
+
+        rows[i].classList.toggle('is-active', active);
+        rows[i].classList.toggle('is-passed', !active && c < mid);
+      }
+    }
+
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+
+
   /* ---------- 타임라인 : 라인 드로잉 + 전용 리빌 타이밍 ---------- */
   function initTimeline() {
     var tl = document.getElementById('tl');
@@ -104,6 +139,7 @@
     if (!tl || !line) return;   // 타임라인이 없는 페이지면 종료
 
     initTimelineReveal(tl);
+    initTimelineHighlight(tl);
 
     // 모션 최소화 : 라인을 다 그려진 상태로 두고 스크롤 연동 없음
     if (reduce) {
@@ -135,5 +171,6 @@
   }
 
   initTimeline();
+
 
 })();

@@ -231,7 +231,6 @@
     margin: calc(var(--sz) / -2) 0 0 calc(var(--sz) / -2);
     border-radius: 50%;
     background: #fffaf0;
-    /* 번짐은 크기에 비례 — 큰 광점이 더 넓게 퍼짐 */
     box-shadow: 0 0 calc(var(--sz) * 2.4) calc(var(--sz) * .7) rgba(255, 206, 132, .7);
     filter: blur(.4px);
     opacity: 0;
@@ -253,10 +252,8 @@
     }
 }
 
-/* ---- 타입 B (짝수 번째) : 코어는 작게 상시 유지하고, 할로만 퍼졌다 스며듦 ----
-   코어 자체는 애니메이션 없음 — 움직이는 건 ::after 할로의 scale·opacity 뿐 */
+
 .bz-spark:nth-child(2n) {
-    /* 할로 최대 밝기 · 코어 대비 할로 지름 배율(6~10) — 조절 지점 */
     --h-max: .9;
     --hm: 8;
     background: rgba(255, 245, 225, .6);
@@ -266,7 +263,6 @@
     animation: none;
     will-change: auto;
 }
-
 .bz-spark:nth-child(2n)::after {
     content: '';
     position: absolute;
@@ -303,9 +299,7 @@
 }
 
 
-/* 홀수 번째 = 타입 A (또렷한 반짝임, 4~9px / 2.5~5s)
-   짝수 번째 = 타입 B (은은한 빛 번짐, 코어 2~3px / 4~7s / --hm = 할로 배율)
-   두 타입의 주기·위상이 서로 엇갈리도록 값을 섞어 배치 */
+
 .bz-spark:nth-child(2)  { --x: 22%; --y: 58%; --s: 3px; --dur: 5.5s; --dly: -.6s; --hm: 9 }
 .bz-spark:nth-child(3)  { --x: 29%; --y: 33%; --s: 4px; --dur: 4.1s; --dly: .7s }
 .bz-spark:nth-child(4)  { --x: 34%; --y: 47%; --s: 2px; --dur: 6.4s; --dly: -2.9s; --hm: 7 }
@@ -383,7 +377,6 @@
     background: #fff;
 }
 
-/* 로고 영역 : 연한 그라데이션 + 로고 중앙 */
 .brand-logo {
     display: flex;
     align-items: center;
@@ -396,21 +389,16 @@
 
 .brand-logo img {
     width: auto;
-    /* --logo-k : 화면 폭에 따른 공통 배율 (카드별 --logo-h 비율은 그대로 유지) */
     height: calc(var(--logo-h, 56px) * var(--logo-k, 1));
     max-width: 100%;
     max-height: 100%;
-    /* max-* 에 걸려 줄어들 때 비율이 깨지지 않도록 */
     object-fit: contain;
 }
 
-/* 로고 크기 : 원본 비율·여백이 제각각이라 카드마다 따로 조절.
-   파머스 국제어학원(원본 442×48, 여백 없음)을 기준으로 글자 크기를 맞춘 값 —
-   숫자만 올리고 내리면 해당 로고만 커지고 작아짐 */
-.brand-card:nth-child(1) { --logo-h: 100px }  /* 파머스영어 : 원본 위아래 여백이 커서 높게 */
-.brand-card:nth-child(2) { --logo-h: 48px }   /* 파머스 국제어학원 : 기준 (원본 높이 그대로) */
-.brand-card:nth-child(3) { --logo-h: 88px }   /* 고래영어 : 2줄 락업 */
-.brand-card:nth-child(4) { --logo-h: 92px }   /* IB 라이팅 : 2줄 락업 */
+.brand-card:nth-child(1) { --logo-h: 100px } 
+.brand-card:nth-child(2) { --logo-h: 48px }  
+.brand-card:nth-child(3) { --logo-h: 88px }  
+.brand-card:nth-child(4) { --logo-h: 92px }  
 
 /* 텍스트 영역 : 더보기를 카드 하단에 붙임 */
 .brand-body {
@@ -447,11 +435,9 @@
     margin-left: 8px;
 }
 
-/* 호버 : 살짝 떠오름 (터치 기기 제외)
-   리빌이 끝난 뒤엔 카드의 트랜지션을 호버용으로 넘겨받음 (.reveal 지연이 남지 않도록) */
+
 @media (hover: hover) and (pointer: fine) {
 
-    /* is-in 이후엔 .reveal 트랜지션(지연 포함)을 호버용으로 교체 */
     .brand-card,
     .js .brand-card.is-in {
         transition: transform .3s ease, box-shadow .3s ease;
@@ -459,7 +445,6 @@
 
     .brand-card:hover,
     .js .brand-card.is-in:hover {
-        transform: translateY(-8px);
         box-shadow: 0 18px 36px rgba(34, 53, 92, .14);
     }
 
@@ -504,6 +489,16 @@
     .brand-grid {
         --logo-k: .6;
     }
+
+    /* 배너 카피 위치를 about 페이지와 동일하게 : 라벨 상단 / 카피는 아래로 */
+    .bz-ban-inner {
+        justify-content: space-between;
+        padding-bottom: clamp(50px, 18vh, 215px);
+    }
+
+    .bz-copy {
+        margin-top: 0;
+    }
 }
 
 @media (max-width: 640px) {
@@ -518,11 +513,6 @@
     .bz-sub {
         font-size: clamp(12.5px, 3.4vw, 17px);
         line-height: 1.6;
-    }
-
-    /* 배너가 짧아지므로 카피를 조금 위로 */
-    .bz-copy {
-        margin-top: clamp(24px, 9vh, 80px);
     }
 
     /* 좁은 폭에서는 광점을 70%로 (px 고정이라 그냥 두면 상대적으로 커 보임) */

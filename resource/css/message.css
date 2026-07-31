@@ -105,9 +105,11 @@
     background: #faf8f3;
 }
 
+/* 본문 폭 = 서한 폭(800px) + 좌우 패딩.
+   1400px로 두면 글이 왼쪽에 몰려 오른쪽 여백만 넓어져서, 컬럼째 가운데로 맞춤 */
 .msg-inner {
     width: 100%;
-    max-width: 1400px;
+    max-width: calc(800px + clamp(20px, 4vw, 60px) * 2);
     margin: 0 auto;
     padding: 0 clamp(20px, 4vw, 60px);
 }

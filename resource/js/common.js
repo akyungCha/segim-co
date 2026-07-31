@@ -30,6 +30,9 @@
 
   /* ---------- 2depth 열기/닫기 ---------- */
   function openSub(item, open) {
+    // 260731 아경 : 2depth(.sub-list) 없는 메뉴는 열지 않음
+    if (open && !item.querySelector('.sub-list')) return;
+
     item.classList.toggle('is-open', open);
     var btn = item.querySelector('.sub-btn');
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
