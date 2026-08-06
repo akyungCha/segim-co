@@ -1,0 +1,5 @@
+# 전체 허용
+User-agent: *
+Allow: /
+
+Sitemap: https://segimedu.com/sitemap.xml
