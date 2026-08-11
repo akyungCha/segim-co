@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -54,6 +55,7 @@
 
   <link rel="stylesheet" href="resource/css/index.css">
 </head>
+
 <body>
 
   <!-- ============================================================
@@ -68,7 +70,8 @@
       </a>
 
       <!-- 모바일 햄버거 버튼 -->
-      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="gnbMenu">
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="전체메뉴 열기" aria-expanded="false"
+        aria-controls="gnbMenu">
         <span class="menu-btn-bar"></span>
         <span class="menu-btn-bar"></span>
         <span class="menu-btn-bar"></span>
@@ -149,8 +152,12 @@
 
       <!-- 약관 링크 -->
       <ul class="footer-link">
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#">개인정보취급방침</a></li>
+        <li><a href="terms.html"
+            onclick="window.open(this.href, 'termsPopup', 'width=960,height=900,scrollbars=yes,resizable=yes'); return false;">이용약관</a>
+        </li>
+        <li><a href="privacy.html"
+            onclick="window.open(this.href, 'privacyPopup', 'width=960,height=900,scrollbars=yes,resizable=yes'); return false;">개인정보처리방침</a>
+        </li>
       </ul>
 
       <!-- 사업자 정보 -->
@@ -176,4 +183,5 @@
 
   <script src="resource/js/common.js"></script>
 </body>
+
 </html>
