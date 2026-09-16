@@ -48,6 +48,10 @@
             box-sizing: border-box;
         }
 
+        [hidden] {
+            display: none !important;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -618,7 +622,7 @@
             var form = $('c-form'), list = $('c-list'), more = $('c-more'), msg = $('c-msg'),
                 nick = $('c-nick'), body = $('c-body'), submit = $('c-submit'),
                 lenEl = $('c-len'), total = $('c-total');
-            var cursor = null, count = 0;
+            var cursor = null, count = 0, seen = {};
 
             if (!API) {
                 msg.textContent = '댓글 API 주소가 설정되지 않았습니다.';
@@ -661,16 +665,34 @@
                 list.appendChild(li);
             }
 
+            // id 가 없던 예전 응답도 다룰 수 있게 (시각+닉+본문)으로 대체 키를 만든다
+            function keyOf(it) {
+                return it.id || (it.createdAt + '|' + it.nick + '|' + it.body);
+            }
+
             function load(append) {
-                var url = API + '?page=' + PAGE + (append && cursor ? '&cursor=' + encodeURIComponent(cursor) : '');
+                // 다음 페이지 커서가 없으면 더 보기는 아예 요청하지 않는다 (1페이지 재조회 = 중복의 원인)
+                if (append && !cursor) { more.hidden = true; return Promise.resolve(); }
+                var sent = cursor;
+                var url = API + '?page=' + PAGE + (append ? '&cursor=' + encodeURIComponent(sent) : '');
                 return fetch(url).then(function (r) { return r.json(); }).then(function (d) {
-                    if (!append) { list.textContent = ''; count = 0; }
-                    cursor = d.cursor;
-                    count += d.items.length;
-                    d.items.forEach(add);
+                    if (!append) { list.textContent = ''; count = 0; seen = {}; }
+                    var items = d.items || [];
+                    var added = 0;
+                    items.forEach(function (it) {
+                        var k = keyOf(it);
+                        if (seen[k]) return;
+                        seen[k] = true;
+                        add(it);
+                        added++;
+                    });
+                    count += added;
+                    var next = d.cursor || d.nextCursor || null;
+                    // 커서가 없거나 / 방금 보낸 커서와 같거나 / 새 항목이 하나도 없으면 끝
+                    cursor = (next && next !== sent && !(append && added === 0)) ? next : null;
                     more.hidden = !cursor;
                     total.textContent = count ? '(' + count + (cursor ? '+' : '') + ')' : '';
-                    if (!count) {
+                    if (!append && !count) {
                         var li = document.createElement('li');
                         li.className = 'c-empty';
                         li.textContent = '첫 번째 댓글을 남겨 주세요.';
